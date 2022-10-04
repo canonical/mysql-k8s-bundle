@@ -1,0 +1,20 @@
+bundle: kubernetes
+name: mysql-k8s-bundle
+type: bundle
+applications:
+  mysql-k8s:
+    charm: mysql-k8s
+    channel: edge
+    revision: 15
+    scale: 1
+    constraints: arch=amd64
+  mysql-router-k8s:
+    charm: mysql-router-k8s
+    channel: edge
+    revision: 2
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+relations:
+- - mysql-k8s:database
+  - mysql-router-k8s:backend-database
