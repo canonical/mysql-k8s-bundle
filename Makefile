@@ -1,5 +1,4 @@
 BUILD_DIRECTORY := ./build_directory
-MODEL_NAME := $(shell juju models --format=yaml | yq ".current-model")
 
 clean:
 	rm -rf $(BUILD_DIRECTORY)
@@ -16,7 +15,7 @@ deploy: build
 	juju deploy $(BUILD_DIRECTORY)/mysql-k8s-bundle.zip --trust
 
 destroy-model:
-	juju destroy-model --force --destroy-storage $(MODEL_NAME)
+	juju destroy-model --force --destroy-storage $(shell juju models --format=yaml | yq ".current-model")
 
 release:
 	charmcraft upload $(BUILD_DIRECTORY)/*.zip
