@@ -29,7 +29,7 @@ jobs:
           labels: |
             automated pr
           assignees: team-reviewers, shayancanonical, paulomach
-          reviewers: team-reviewers, shayancanonical, paulomach
+          reviewers: team-reviewers, paulomach
           team-reviewers: |
             owners
             maintainers

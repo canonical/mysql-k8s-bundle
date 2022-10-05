@@ -18,7 +18,6 @@ deploy: build
 destroy-model:
 	juju destroy-model --force --destroy-storage $(MODEL_NAME)
 
-# TODO: Convert the echo statements into real statements when ready to release
 release:
-	echo "charmcraft upload $(BUILD_DIRECTORY)/*.zip"
-	echo "charmcraft release mysql-k8s-bundle --revision $(shell charmcraft revisions mysql-k8s-bundle | awk 'NR==2 {print $$1}') --channel=latest/edge"
+	charmcraft upload $(BUILD_DIRECTORY)/*.zip
+	charmcraft release mysql-k8s-bundle --revision $(shell charmcraft revisions mysql-k8s-bundle | awk 'NR==2 {print $$1}') --channel=latest/edge
