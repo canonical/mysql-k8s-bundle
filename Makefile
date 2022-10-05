@@ -18,5 +18,4 @@ destroy-model:
 	juju destroy-model --force --destroy-storage $(shell juju models --format=yaml | yq ".current-model")
 
 release: build
-	charmcraft upload $(BUILD_DIRECTORY)/*.zip
-	charmcraft release mysql-k8s-bundle --revision $(shell charmcraft revisions mysql-k8s-bundle | awk 'NR==2 {print $$1}') --channel=latest/edge
+	charmcraft upload $(BUILD_DIRECTORY)/*.zip --name mysql-k8s-bundle --release=latest/edge
