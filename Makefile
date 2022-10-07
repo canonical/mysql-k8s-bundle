@@ -1,4 +1,4 @@
-BUILD_DIRECTORY := ./build_directory
+BUILD_DIRECTORY := ./build
 
 clean:
 	rm -rf $(BUILD_DIRECTORY)
