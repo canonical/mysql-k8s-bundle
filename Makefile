@@ -9,7 +9,7 @@ build: clean
 	cp ./charmcraft.yaml $(BUILD_DIRECTORY)
 	cp ./metadata.yaml $(BUILD_DIRECTORY)
 	cp ./README.md $(BUILD_DIRECTORY)
-	charmcraft pack --destructive-mode --project-dir $(BUILD_DIRECTORY)
+	charmcraft pack --project-dir $(BUILD_DIRECTORY)
 
 deploy: build
 	juju deploy $(BUILD_DIRECTORY)/mysql-k8s-bundle.zip --trust
@@ -19,3 +19,6 @@ destroy-model:
 
 release: build
 	charmcraft upload $(BUILD_DIRECTORY)/*.zip --name mysql-k8s-bundle --release=latest/edge
+
+remove:
+	juju remove-application mysql-k8s mysql-router-k8s tls-certificates-operator
