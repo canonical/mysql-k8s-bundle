@@ -1,3 +1,8 @@
+bundle: kubernetes
+name: mysql-k8s-bundle
+description: MySQL operator bundle
+source: https://github.com/canonical/mysql-k8s-bundle
+issues: https://github.com/canonical/mysql-k8s-bundle/issues
 applications:
   mysql-k8s:
     channel: latest/edge
@@ -12,9 +17,18 @@ applications:
     revision: 2
     scale: 1
     trust: true
-bundle: kubernetes
-name: mysql-k8s-bundle
+  tls-certificates-operator:
+    channel: latest/edge
+    charm: tls-certificates-operator
+    constraints: arch=amd64
+    revision: 11
+    scale: 1
+    options:
+      ca-common-name: canonical
+      generate-self-signed-certificates: true
 relations:
-- - mysql-k8s:database
-  - mysql-router-k8s:backend-database
+  - - mysql-k8s:database
+    - mysql-router-k8s:backend-database
+  - - mysql-k8s
+    - tls-certificates-operator
 type: bundle
