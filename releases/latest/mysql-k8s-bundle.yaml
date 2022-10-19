@@ -9,7 +9,7 @@ applications:
     charm: mysql-k8s
     constraints: arch=amd64
     revision: 19
-    scale: 1
+    scale: 3
   mysql-router-k8s:
     channel: latest/edge
     charm: mysql-router-k8s
@@ -29,6 +29,6 @@ applications:
 relations:
   - - mysql-k8s:database
     - mysql-router-k8s:backend-database
-  - - mysql-k8s:tls-certificates
-    - tls-certificates-operator:tls-certificates
+  - - mysql-k8s:certificates
+    - tls-certificates-operator:certificates
 type: bundle
