@@ -15,7 +15,6 @@ logger = logging.getLogger(__name__)
 
 async def test_deploy_bundle(ops_test: OpsTest) -> None:
     """Deploy bundle."""
-
     async with ops_test.fast_forward():
         await ops_test.model.deploy("./releases/latest/mysql-k8s-bundle.yaml", trust=True)
 
