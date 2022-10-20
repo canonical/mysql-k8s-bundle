@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # Copyright 2022 Canonical Ltd.
 # See LICENSE file for licensing details.
 
@@ -19,7 +19,6 @@ async def test_deploy_bundle(ops_test: OpsTest) -> None:
         await ops_test.model.deploy("./releases/latest/mysql-k8s-bundle.yaml", trust=True)
 
         await ops_test.model.wait_for_idle(
-            apps=[MYSQL_APP, TLS_APP], status="active", timeout=5 * 60
+            apps=[MYSQL_APP, ROUTER_APP, TLS_APP], timeout=5 * 60
         )
 
-        await ops_test.model.wait_for_idle(apps=[ROUTER_APP], status="waiting", timeout=5 * 60)
