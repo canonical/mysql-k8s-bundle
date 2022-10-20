@@ -18,7 +18,4 @@ async def test_deploy_bundle(ops_test: OpsTest) -> None:
     async with ops_test.fast_forward():
         await ops_test.model.deploy("./releases/latest/mysql-k8s-bundle.yaml", trust=True)
 
-        await ops_test.model.wait_for_idle(
-            apps=[MYSQL_APP, ROUTER_APP, TLS_APP], timeout=5 * 60
-        )
-
+        await ops_test.model.wait_for_idle(apps=[MYSQL_APP, ROUTER_APP, TLS_APP], timeout=5 * 60)
