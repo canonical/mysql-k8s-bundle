@@ -1,5 +1,6 @@
 *.charm
-.tox
 *__pycache__
 .pytest_cache
+.tox
+build/
 
