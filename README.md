@@ -2,22 +2,54 @@
 
 Welcome to the Canonical Distribution of MySQL + MySQLRouter.
 
-The objective of this page is to provide directions to get up and running with Canonical MySQL
-charms.
+The objective of this page is to provide directions to
+get up and running with Canonical MySQL charms.
 
 ## Installation
 
 Currently, we support this distribution with Ubuntu 20.04.
 
-To get started, please install the following:
-- Microk8s
-- Juju
+To get started, please take Ubuntu 22.04 LTS and install the
+necessary components. Juju, MicroK8s (with add-ons as listed below):
 
-Then set up microk8s by enabling the `dns`, `ha-cluster` and `storage` add-ons.
+```shell
+sudo snap refresh
+sudo snap install juju --classic
+sudo snap install microk8s --classic
+sudo snap install jhack # nice to have it nearby
+sudo microk8s enable dns storage ha-cluster ingress hostpath-storage
+sudo usermod -a -G microk8s $(whoami) && newgrp microk8s
+```
 
-To follow, please bootstrap the juju controller with microk8s using `juju bootstrap microk8s <controller_name>`.
+To follow, please bootstrap the juju controller with microk8s using:
 
-Finally add a juju model with `juju add-model <model-name>` and deploy the bundle with `juju deploy mysql-k8s-bundle`.
+```shell
+juju bootstrap microk8s my-microk8s
+```
+
+Finally add a juju model and deploy the bundle:
+
+```shell
+juju add-model my-mysql-k8s
+juju deploy mysql-k8s-bundle --trust # --channel edge # Choose a channel!
+juju status # you are ready!
+juju status --watch 1s --storage --relations # watch all the information
+```
+
+Feel free to increase DEBUG verbosity for troubleshooting:
+
+```shell
+juju model-config 'logging-config=<root>=INFO;unit=DEBUG'
+juju debug-log # show all logs together
+juju debug-log --include mysql-k8s/0 --replay --tail # to check specific unit
+```
+
+To destroy the complete Juju model with all newly deployed charms and data:
+
+```shell
+juju destroy-model my-mysql-k8s -y --destroy-storage --force && \
+juju add-model my-mysql-k8s && juju status
+```
 
 ## Bundle Components
 - [mysql-k8s](https://charmhub.io/mysql-k8s): A k8s charm to deploy MySQL with Group Replication.
