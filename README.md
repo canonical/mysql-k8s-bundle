@@ -1,5 +1,7 @@
 # Canonical Distribution of MySQL + MySQLRouter
 
+[![None](https://charmhub.io/mysql-k8s-bundle/badge.svg)](https://charmhub.io/mysql-k8s-bundle)
+
 Welcome to the Canonical Distribution of MySQL + MySQLRouter.
 
 The objective of this page is to provide directions to
@@ -52,9 +54,14 @@ juju add-model my-mysql-k8s && juju status
 ```
 
 ## Bundle Components
+
+[![MySQL](https://charmhub.io/mysql-k8s/badge.svg)](https://charmhub.io/mysql-k8s) [![MySQL Router](https://charmhub.io/mysql-router-k8s/badge.svg)](https://charmhub.io/mysql-router-k8s) [![TLS Certificates](https://charmhub.io/tls-certificates-operator/badge.svg)](https://charmhub.io/tls-certificates-operator)
+
 - [mysql-k8s](https://charmhub.io/mysql-k8s): A k8s charm to deploy MySQL with Group Replication.
 - [mysql-router-k8s](https://charmhub.io/mysql-router-k8s) - a k8s charm to deploy MySQL Router.
-- [tls-certificates-operator](https://charmhub.io/tls-certificates-operator) - TLS operator. Note: The TLS settings in bundles use self-signed-certificates which are not recommended for production clusters, the tls-certificates-operator charm offers a variety of configurations, read more on the TLS charm [here](https://charmhub.io/tls-certificates-operator).
+- [tls-certificates-operator](https://charmhub.io/tls-certificates-operator) - TLS operator.
+
+Note: The TLS settings in bundles use self-signed-certificates which are not recommended for production clusters, the tls-certificates-operator charm offers a variety of configurations, read more on the TLS charm [here](https://charmhub.io/tls-certificates-operator).
 
 ## Troubleshooting
 
