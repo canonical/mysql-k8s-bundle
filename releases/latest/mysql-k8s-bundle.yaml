@@ -19,7 +19,7 @@ applications:
     options:
       ca-common-name: canonical
       generate-self-signed-certificates: true
-    revision: 16
+    revision: 19
     scale: 1
 bundle: kubernetes
 description: MySQL operator bundle
