@@ -119,6 +119,39 @@ async def get_server_config_credentials(unit: Unit) -> Dict:
     return result.results
 
 
+async def get_process_pid(
+    ops_test: OpsTest, unit_name: str, container_name: str, process: str
+) -> int:
+    """Return the pid of a process running in a given unit.
+    Args:
+        ops_test: The ops test object passed into every test case
+        unit_name: The name of the unit
+        container_name: The name of the container in the unit
+        process: The process name to search for
+    Returns:
+        A integer for the process id
+    """
+    get_pid_commands = [
+        "ssh",
+        "--container",
+        container_name,
+        unit_name,
+        "pgrep",
+        process,
+    ]
+    return_code, pid, _ = await ops_test.juju(*get_pid_commands)
+
+    assert (
+        return_code == 0
+    ), f"Failed getting pid, unit={unit_name}, container={container_name}, process={process}"
+
+    stripped_pid = pid.strip()
+    if not stripped_pid:
+        return -1
+
+    return int(stripped_pid)
+
+
 # Copied from https://github.com/canonical/mysql-k8s-operator/blob/51ca494daf62ef9f1aa787d3ff97a52607f21c78/tests/integration/high_availability/high_availability_helpers.py
 async def get_max_written_value_in_database(ops_test: OpsTest, unit: Unit) -> int:
     """Retrieve the max written value in the MySQL database.
@@ -156,6 +189,71 @@ async def get_application_name(ops_test: OpsTest, application_name: str) -> str:
             return application
 
     return None
+
+
+async def ensure_n_online_mysql_members(
+    ops_test: OpsTest, number_online_members: int, mysql_units: Optional[List[Unit]] = None
+) -> bool:
+    """Waits until N mysql cluster members are online.
+    Args:
+        ops_test: The ops test framework
+        number_online_members: Number of online members to wait for
+        mysql_units: Expected online mysql units
+    """
+    mysql_application = await get_application_name(ops_test, "mysql")
+
+    if not mysql_units:
+        mysql_units = ops_test.model.applications[mysql_application].units
+    mysql_unit = mysql_units[0]
+
+    try:
+        for attempt in Retrying(stop=stop_after_delay(5 * 60), wait=wait_fixed(10)):
+            with attempt:
+                cluster_status = await get_cluster_status(ops_test, mysql_unit)
+                online_members = [
+                    label
+                    for label, member in cluster_status["defaultreplicaset"]["topology"].items()
+                    if member["status"] == "online"
+                ]
+                assert len(online_members) == number_online_members
+                return True
+    except RetryError:
+        return False
+
+
+async def send_signal_to_pod_container_process(
+    ops_test: OpsTest, unit_name: str, container_name: str, process: str, signal_code: str
+) -> None:
+    """Send the specified signal to a pod container process.
+    Args:
+        ops_test: The ops test framework
+        unit_name: The name of the unit to send signal to
+        container_name: The name of the container to send signal to
+        process: The name of the process to send signal to
+        signal_code: The code of the signal to send
+    """
+    kubernetes.config.load_kube_config()
+
+    pod_name = unit_name.replace("/", "-")
+
+    send_signal_command = f"pkill --signal {signal_code} -f {process}"
+    response = kubernetes.stream.stream(
+        kubernetes.client.api.core_v1_api.CoreV1Api().connect_get_namespaced_pod_exec,
+        pod_name,
+        ops_test.model.info.name,
+        container=container_name,
+        command=send_signal_command.split(),
+        stdin=False,
+        stdout=True,
+        stderr=True,
+        tty=False,
+        _preload_content=False,
+    )
+    response.run_forever(timeout=5)
+
+    assert (
+        response.returncode == 0
+    ), f"Failed to send {signal_code} signal, unit={unit_name}, container={container_name}, process={process}"
 
 
 async def ensure_all_units_continuous_writes_incrementing(
