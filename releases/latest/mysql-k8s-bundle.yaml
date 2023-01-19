@@ -3,13 +3,13 @@ applications:
     channel: latest/edge
     charm: mysql-k8s
     constraints: arch=amd64
-    revision: 24
+    revision: 30
     scale: 3
   mysql-router-k8s:
     channel: latest/edge
     charm: mysql-router-k8s
     constraints: arch=amd64
-    revision: 5
+    revision: 6
     scale: 1
     trust: true
   tls-certificates-operator:
@@ -19,7 +19,7 @@ applications:
     options:
       ca-common-name: canonical
       generate-self-signed-certificates: true
-    revision: 19
+    revision: 20
     scale: 1
 bundle: kubernetes
 description: MySQL operator bundle
