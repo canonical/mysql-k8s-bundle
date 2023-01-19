@@ -3,10 +3,13 @@
 import itertools
 from typing import Dict, List, Optional
 
+import kubernetes
 import mysql.connector
 from juju.unit import Unit
 from pytest_operator.plugin import OpsTest
-from tenacity import Retrying, stop_after_delay, wait_fixed
+from tenacity import RetryError, Retrying, stop_after_delay, wait_fixed
+
+from tests.integration.constants import MYSQL_APP
 
 SERVER_CONFIG_USERNAME = "serverconfig"
 DATABASE_NAME = "continuous_writes_database"
@@ -200,7 +203,7 @@ async def ensure_n_online_mysql_members(
         number_online_members: Number of online members to wait for
         mysql_units: Expected online mysql units
     """
-    mysql_application = await get_application_name(ops_test, "mysql")
+    mysql_application = await get_application_name(ops_test, MYSQL_APP)
 
     if not mysql_units:
         mysql_units = ops_test.model.applications[mysql_application].units
@@ -263,12 +266,10 @@ async def ensure_all_units_continuous_writes_incrementing(
     Also, ensure that all continuous writes up to the max written value is available
     on all units (ensure that no committed data is lost).
     """
-    mysql_application_name = await get_application_name(ops_test, "mysql")
-
     if not mysql_units:
-        mysql_units = ops_test.model.applications[mysql_application_name].units
+        mysql_units = ops_test.model.applications[MYSQL_APP].units
 
-    primary = await get_primary_unit(ops_test, mysql_units[0], mysql_application_name)
+    primary = await get_primary_unit(ops_test, mysql_units[0], MYSQL_APP)
 
     last_max_written_value = await get_max_written_value_in_database(ops_test, primary)
 
