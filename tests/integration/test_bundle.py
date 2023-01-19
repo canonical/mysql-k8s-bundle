@@ -7,6 +7,7 @@
 import logging
 import time
 
+import pytest
 from pytest_operator.plugin import OpsTest
 
 from tests.integration.constants import APPLICATION_APP, MYSQL_APP, ROUTER_APP, TLS_APP
@@ -24,6 +25,7 @@ MYSQLD_PROCESS_NAME = "mysqld"
 logger = logging.getLogger(__name__)
 
 
+@pytest.mark.abort_on_fail
 async def test_deploy_bundle(ops_test: OpsTest) -> None:
     """Deploy bundle."""
     async with ops_test.fast_forward():
