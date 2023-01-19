@@ -41,7 +41,7 @@ async def test_deploy_bundle(ops_test: OpsTest) -> None:
 async def test_mysql_primary_switchover(ops_test: OpsTest):
     """Ensures writes continue after the primary is killed."""
     # Deploy application & relate to router
-    application_charm = await ops_test.build_charm("./tests/integration/application-charm/")
+    application_charm = await ops_test.build_charm("./tests/integration/application_charm/")
     await ops_test.model.deploy(application_charm, application_name=APPLICATION_APP, num_units=1)
     await ops_test.model.relate(f"{APPLICATION_APP}:database", f"{ROUTER_APP}:database")
     await ops_test.model.wait_for_idle(
