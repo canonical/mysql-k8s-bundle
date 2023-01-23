@@ -50,48 +50,48 @@ async def test_mysql_primary_switchover(ops_test: OpsTest):
         raise_on_blocked=True,
         timeout=15 * 60,
     )
-    # # Start writes
-    # await ensure_all_units_continuous_writes_incrementing(ops_test)
-    # # Kill primary mysql
-    # mysql_units = ops_test.model.applications[MYSQL_APP].units
-    # primary = await get_primary_unit(ops_test, mysql_units[0], MYSQL_APP)
-    # # ensure all units in the cluster are online
-    # assert await ensure_n_online_mysql_members(
-    #     ops_test, 3
-    # ), "The deployed mysql application is not fully online"
-    #
-    # mysql_pid = await get_process_pid(
-    #     ops_test, primary.name, MYSQL_CONTAINER_NAME, MYSQLD_PROCESS_NAME
-    # )
-    #
-    # await send_signal_to_pod_container_process(
-    #     ops_test,
-    #     primary.name,
-    #     MYSQL_CONTAINER_NAME,
-    #     MYSQLD_PROCESS_NAME,
-    #     "SIGKILL",
-    # )
-    #
-    # # Wait for the SIGKILL above to take effect before continuing with test checks
-    # time.sleep(10)
-    #
-    # assert await ensure_n_online_mysql_members(
-    #     ops_test, 3
-    # ), "The mysql application is not fully online after sending SIGKILL to primary"
-    #
-    # # ensure that the mysqld process got restarted and has a new process id
-    # new_mysql_pid = await get_process_pid(
-    #     ops_test, primary.name, MYSQL_CONTAINER_NAME, MYSQLD_PROCESS_NAME
-    # )
-    # assert (
-    #     mysql_pid != new_mysql_pid
-    # ), "The mysql process id is the same after sending it a SIGKILL"
-    #
-    # new_primary = await get_primary_unit(ops_test, mysql_units[0], MYSQL_APP)
-    # assert (
-    #     primary.name != new_primary.name
-    # ), "The mysql primary has not been reelected after sending a SIGKILL"
-    #
-    # # Ensure writes continue
-    # async with ops_test.fast_forward():
-    #     await ensure_all_units_continuous_writes_incrementing(ops_test)
+    # Start writes
+    await ensure_all_units_continuous_writes_incrementing(ops_test)
+    # Kill primary mysql
+    mysql_units = ops_test.model.applications[MYSQL_APP].units
+    primary = await get_primary_unit(ops_test, mysql_units[0], MYSQL_APP)
+    # ensure all units in the cluster are online
+    assert await ensure_n_online_mysql_members(
+        ops_test, 3
+    ), "The deployed mysql application is not fully online"
+
+    mysql_pid = await get_process_pid(
+        ops_test, primary.name, MYSQL_CONTAINER_NAME, MYSQLD_PROCESS_NAME
+    )
+
+    await send_signal_to_pod_container_process(
+        ops_test,
+        primary.name,
+        MYSQL_CONTAINER_NAME,
+        MYSQLD_PROCESS_NAME,
+        "SIGKILL",
+    )
+
+    # Wait for the SIGKILL above to take effect before continuing with test checks
+    time.sleep(10)
+
+    assert await ensure_n_online_mysql_members(
+        ops_test, 3
+    ), "The mysql application is not fully online after sending SIGKILL to primary"
+
+    # ensure that the mysqld process got restarted and has a new process id
+    new_mysql_pid = await get_process_pid(
+        ops_test, primary.name, MYSQL_CONTAINER_NAME, MYSQLD_PROCESS_NAME
+    )
+    assert (
+        mysql_pid != new_mysql_pid
+    ), "The mysql process id is the same after sending it a SIGKILL"
+
+    new_primary = await get_primary_unit(ops_test, mysql_units, MYSQL_APP)
+    assert (
+        primary.name != new_primary.name
+    ), "The mysql primary has not been reelected after sending a SIGKILL"
+
+    # Ensure writes continue
+    async with ops_test.fast_forward():
+        await ensure_all_units_continuous_writes_incrementing(ops_test)
