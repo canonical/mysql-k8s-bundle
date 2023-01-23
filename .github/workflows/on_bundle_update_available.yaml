@@ -11,26 +11,20 @@ jobs:
       - uses: actions/checkout@v3
       - name: check for updates
         run: |
+          git branch -D update-bundles || true
+          git checkout -b update-bundles
           ./update_bundle.py releases/latest/mysql-k8s-bundle.yaml
+          git add releases/latest/mysql-k8s-bundle.yaml
+          git config author.name "GitHub <noreply@github.com>"
+          git config author.email "${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
+          git commit -m "Update bundles"
       - name: create pull request
-        id: cpr
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.PAT }}
-          commit-message: Update bundles
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          signoff: false
-          branch: update-bundles
-          delete-branch: true
-          title: 'Update Bundles'
-          body: |
-            Update bundles with new revisions from Charmhub.
-          labels: |
-            automated pr
-          assignees: team-reviewers, shayancanonical, paulomach
-          reviewers: team-reviewers, paulomach
-          team-reviewers: |
-            owners
-            maintainers
-          draft: false
+        run: gh pr create \
+          --title 'Update Bundles' \
+          --body 'Update bundles with new revisions from Charmhub.' \
+          --base main
+          --assignee team-reviewers, shayancanonical, paulomach \
+          --reviewer team-reviewers, shayancanonical, paulomach \
+          --label 'automated pr'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
