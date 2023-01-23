@@ -87,7 +87,7 @@ async def test_mysql_primary_switchover(ops_test: OpsTest):
         mysql_pid != new_mysql_pid
     ), "The mysql process id is the same after sending it a SIGKILL"
 
-    new_primary = await get_primary_unit(ops_test, mysql_units, MYSQL_APP)
+    new_primary = await get_primary_unit(ops_test, mysql_units[0], MYSQL_APP)
     assert (
         primary.name != new_primary.name
     ), "The mysql primary has not been reelected after sending a SIGKILL"
