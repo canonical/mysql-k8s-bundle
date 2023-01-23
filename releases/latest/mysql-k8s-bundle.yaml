@@ -14,15 +14,6 @@ applications:
     scale: 1
     series: jammy
     trust: true
-  tls-certificates-operator:
-    channel: latest/edge
-    charm: tls-certificates-operator
-    constraints: arch=amd64
-    options:
-      ca-common-name: canonical
-      generate-self-signed-certificates: true
-    revision: 20
-    scale: 1
 bundle: kubernetes
 description: MySQL operator bundle
 issues: https://github.com/canonical/mysql-k8s-bundle/issues
@@ -30,7 +21,5 @@ name: mysql-k8s-bundle
 relations:
 - - mysql-k8s:database
   - mysql-router-k8s:backend-database
-- - mysql-k8s:certificates
-  - tls-certificates-operator:certificates
 source: https://github.com/canonical/mysql-k8s-bundle
 type: bundle
