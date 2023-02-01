@@ -94,4 +94,10 @@ async def test_mysql_primary_switchover(ops_test: OpsTest):
 
     # Ensure writes continue
     async with ops_test.fast_forward():
+        await ops_test.model.wait_for_idle(
+            apps=[MYSQL_APP, ROUTER_APP, APPLICATION_APP],
+            status="active",
+            raise_on_blocked=True,
+            timeout=15 * 60,
+        )
         await ensure_all_units_continuous_writes_incrementing(ops_test)
