@@ -17,3 +17,17 @@ jobs:
         run: python3 -m pip install tox
       - name: Run linters
         run: tox -e lint
+  integration-test:
+    name: Integration test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup operator environment
+        # TODO: Replace with custom image on self-hosted runner
+        uses: charmed-kubernetes/actions-operator@main
+        with:
+          provider: microk8s
+          bootstrap-options: "--agent-version 2.9.38"
+      - name: Run linters
+        run: tox -e integration
