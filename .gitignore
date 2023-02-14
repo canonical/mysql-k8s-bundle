@@ -3,4 +3,5 @@
 .pytest_cache
 .tox
 build/
+venv/
 
