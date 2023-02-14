@@ -39,14 +39,12 @@ def continuous_writes(database_config: Dict, table_name: str, starting_number: i
         except mysql.connector.errors.DatabaseError as e:
             if e.errno == 1062:
                 with MySQLConnector(database_config) as cursor:
-                    cursor.execute(
-                        f"SELECT max(number) FROM `{table_name}`"
-                    )
+                    cursor.execute(f"SELECT max(number) FROM `{table_name}`")
                     result = cursor.fetchall()
                     next_value_to_insert = result[0][0] + 1
                 continue
             continue
-        except Exception as e:
+        except Exception:
             continue
 
         next_value_to_insert += 1

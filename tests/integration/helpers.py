@@ -16,9 +16,9 @@ DATABASE_NAME = "continuous_writes_database"
 TABLE_NAME = "data"
 
 
-# Copied from https://github.com/canonical/mysql-k8s-operator/blob/51ca494daf62ef9f1aa787d3ff97a52607f21c78/tests/integration/helpers.py
 async def get_unit_address(ops_test: OpsTest, unit_name: str) -> str:
     """Get unit IP address.
+
     Args:
         ops_test: The ops test framework instance
         unit_name: The name of the unit
@@ -31,6 +31,7 @@ async def get_unit_address(ops_test: OpsTest, unit_name: str) -> str:
 
 async def get_cluster_status(ops_test: OpsTest, unit: Unit) -> Dict:
     """Get the cluster status by running the get-cluster-status action.
+
     Args:
         ops_test: The ops test framework
         unit: The unit on which to execute the action on
@@ -48,6 +49,7 @@ async def get_primary_unit(
     app_name: str,
 ) -> str:
     """Helper to retrieve the primary unit.
+
     Args:
         ops_test: The ops test object passed into every test case
         unit: A unit on which to execute commands/queries/actions on
@@ -79,6 +81,7 @@ async def execute_queries_on_unit(
     commit: bool = False,
 ) -> List:
     """Execute given MySQL queries on a unit.
+
     Args:
         unit_address: The public IP address of the unit to execute the queries on
         username: The MySQL username
@@ -111,6 +114,7 @@ async def execute_queries_on_unit(
 
 async def get_server_config_credentials(unit: Unit) -> Dict:
     """Helper to run an action to retrieve server config credentials.
+
     Args:
         unit: The juju unit on which to run the get-password action for server-config credentials
     Returns:
@@ -126,6 +130,7 @@ async def get_process_pid(
     ops_test: OpsTest, unit_name: str, container_name: str, process: str
 ) -> int:
     """Return the pid of a process running in a given unit.
+
     Args:
         ops_test: The ops test object passed into every test case
         unit_name: The name of the unit
@@ -155,9 +160,9 @@ async def get_process_pid(
     return int(stripped_pid)
 
 
-# Copied from https://github.com/canonical/mysql-k8s-operator/blob/51ca494daf62ef9f1aa787d3ff97a52607f21c78/tests/integration/high_availability/high_availability_helpers.py
 async def get_max_written_value_in_database(ops_test: OpsTest, unit: Unit) -> int:
     """Retrieve the max written value in the MySQL database.
+
     Args:
         ops_test: The ops test framework
         unit: The MySQL unit on which to execute queries on
@@ -179,6 +184,7 @@ async def get_max_written_value_in_database(ops_test: OpsTest, unit: Unit) -> in
 
 async def get_application_name(ops_test: OpsTest, application_name: str) -> str:
     """Returns the name of the application with the provided application name.
+
     This enables us to retrieve the name of the deployed application in an existing model.
     Note: if multiple applications with the application name exist,
     the first one found will be returned.
@@ -198,6 +204,7 @@ async def ensure_n_online_mysql_members(
     ops_test: OpsTest, number_online_members: int, mysql_units: Optional[List[Unit]] = None
 ) -> bool:
     """Waits until N mysql cluster members are online.
+
     Args:
         ops_test: The ops test framework
         number_online_members: Number of online members to wait for
@@ -228,6 +235,7 @@ async def send_signal_to_pod_container_process(
     ops_test: OpsTest, unit_name: str, container_name: str, process: str, signal_code: str
 ) -> None:
     """Send the specified signal to a pod container process.
+
     Args:
         ops_test: The ops test framework
         unit_name: The name of the unit to send signal to
@@ -263,6 +271,7 @@ async def ensure_all_units_continuous_writes_incrementing(
     ops_test: OpsTest, mysql_units: Optional[List[Unit]] = None
 ) -> None:
     """Ensure that continuous writes is incrementing on all units.
+
     Also, ensure that all continuous writes up to the max written value is available
     on all units (ensure that no committed data is lost).
     """
