@@ -24,7 +24,7 @@ jobs:
 
   build:
     name: Build charms
-    uses: canonical/data-platform-workflows/.github/workflows/build_charms_with_cache.yaml@handle-bundle
+    uses: canonical/data-platform-workflows/.github/workflows/build_charms_with_cache.yaml@v1
 
   integration-test:
     strategy:
