@@ -8,7 +8,7 @@ import logging
 
 from pytest_operator.plugin import OpsTest
 
-from tests.integration.constants import MYSQL_APP, ROUTER_APP, TLS_APP
+from .constants import MYSQL_APP, ROUTER_APP, TLS_APP
 
 logger = logging.getLogger(__name__)
 
