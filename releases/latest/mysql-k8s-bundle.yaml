@@ -5,7 +5,6 @@ applications:
     constraints: arch=amd64
     revision: 37
     scale: 3
-    series: jammy
     trust: true
   mysql-router-k8s:
     channel: latest/edge
@@ -13,7 +12,6 @@ applications:
     constraints: arch=amd64
     revision: 8
     scale: 1
-    series: jammy
     trust: true
   tls-certificates-operator:
     channel: latest/edge
