@@ -90,7 +90,10 @@ async def test_mysql_primary_switchover(ops_test: OpsTest):
         primary.name != new_primary.name
     ), "The mysql primary has not been reelected after sending a SIGKILL"
 
-    # Ensure writes continue
+    # Ensure writes continue on all units except old primary
+    mysql_units = [unit for unit in mysql_units if unit.name != primary.name]
+    await ensure_all_units_continuous_writes_incrementing(ops_test, mysql_units)
+    # Ensure writes continue on all units
     async with ops_test.fast_forward():
         await ops_test.model.wait_for_idle(
             apps=[MYSQL_APP, ROUTER_APP, APPLICATION_APP],
