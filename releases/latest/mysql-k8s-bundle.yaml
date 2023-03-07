@@ -3,18 +3,18 @@ applications:
     channel: latest/edge
     charm: mysql-k8s
     constraints: arch=amd64
-    revision: 40
+    revision: 41
     scale: 3
     trust: true
   mysql-router-k8s:
     channel: latest/edge
     charm: mysql-router-k8s
     constraints: arch=amd64
-    revision: 14
+    revision: 17
     scale: 1
     trust: true
   tls-certificates-operator:
-    channel: latest/edge
+    channel: latest/stable
     charm: tls-certificates-operator
     constraints: arch=amd64
     options:

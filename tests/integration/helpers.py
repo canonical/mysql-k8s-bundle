@@ -217,7 +217,7 @@ async def ensure_n_online_mysql_members(
     mysql_unit = mysql_units[0]
 
     try:
-        for attempt in Retrying(stop=stop_after_delay(5 * 60), wait=wait_fixed(10)):
+        for attempt in Retrying(stop=stop_after_delay(10 * 60), wait=wait_fixed(10)):
             with attempt:
                 cluster_status = await get_cluster_status(ops_test, mysql_unit)
                 online_members = [
