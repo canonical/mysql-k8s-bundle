@@ -1,4 +1,4 @@
-name: bundle update available
+name: Update bundle
 
 on:
   schedule:
@@ -29,9 +29,5 @@ jobs:
             Update bundles with new revisions from Charmhub.
           labels: |
             automated pr
-          assignees: team-reviewers, shayancanonical, paulomach
-          reviewers: team-reviewers, paulomach
-          team-reviewers: |
-            owners
-            maintainers
+          reviewers: canonical/data-platform-mysql
           draft: false
