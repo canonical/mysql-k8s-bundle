@@ -126,3 +126,12 @@ async def test_tls_connection(ops_test: OpsTest):
     cipher = result.results["cipher"]
 
     assert cipher == "TLS_AES_256_GCM_SHA384", "Cipher not set"
+
+    logger.info("Try connection without encryption")
+    params = {"use-ssl": "disabled"}
+    action = await test_app_unit.run_action("get-session-ssl-cipher", **params)
+    result = await action.wait()
+
+    cipher = result.results["cipher"]
+
+    assert cipher == "error", "Unencrypted connection should fail"
