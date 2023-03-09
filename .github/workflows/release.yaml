@@ -26,4 +26,16 @@ jobs:
         run: sudo snap install charmcraft --classic
       - name: Pack and publish bundle
         run: |
-          make release
+          set -ex
+          # Use a temporary directory to support publishing any of the bundles in this root dir
+          BUILD_DIR=.bundle_build
+          mkdir $BUILD_DIR
+          cp ./releases/latest/mysql-k8s-bundle.yaml $BUILD_DIR/bundle.yaml
+          cp charmcraft.yaml $BUILD_DIR
+          cp README.md $BUILD_DIR
+          cd $BUILD_DIR
+          charmcraft pack --destructive-mode
+          charmcraft upload ./*.zip
+          export REVISION=$(charmcraft revisions mysql-k8s-bundle 2>&1 | awk 'NR==2 {print $1}')
+          charmcraft release postgresql-bundle --revision $REVISION --channel=latest/edge
+
