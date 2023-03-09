@@ -73,9 +73,6 @@ async def test_mysql_primary_switchover(ops_test: OpsTest):
         MYSQLD_PROCESS_NAME,
         "SIGKILL",
     )
-    # await ops_test.juju(
-    #    "ssh", primary.name, f"--container {MYSQL_CONTAINER_NAME}", "sudo pkill -9 mysqld"
-    # )
 
     logger.info("Wait for the SIGKILL above to take effect before continuing with checks")
     time.sleep(10)
