@@ -10,7 +10,7 @@ import time
 import pytest
 from pytest_operator.plugin import OpsTest
 
-from tests.integration.constants import APPLICATION_APP, MYSQL_APP, ROUTER_APP
+from tests.integration.constants import APPLICATION_APP, MYSQL_APP, ROUTER_APP, TLS_APP
 from tests.integration.helpers import (
     ensure_all_units_continuous_writes_incrementing,
     ensure_n_online_mysql_members,
@@ -35,7 +35,7 @@ async def test_deploy_bundle(ops_test: OpsTest) -> None:
         logger.info("Deploy MySQL K8s bundle and wait for up and running")
         await ops_test.model.deploy("./releases/latest/mysql-k8s-bundle.yaml", trust=True)
         await ops_test.model.wait_for_idle(apps=[ROUTER_APP], status="waiting", timeout=5 * 60)
-        await ops_test.model.wait_for_idle(apps=[MYSQL_APP], status="active", timeout=15 * 60)
+        await ops_test.model.wait_for_idle(apps=[MYSQL_APP, TLS_APP], status="active", timeout=15 * 60)
 
 
 @pytest.mark.abort_on_fail
