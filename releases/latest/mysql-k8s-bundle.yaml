@@ -10,7 +10,7 @@ applications:
     channel: latest/edge
     charm: mysql-router-k8s
     constraints: arch=amd64
-    revision: 21
+    revision: 22
     scale: 1
   tls-certificates-operator:
     channel: latest/stable
