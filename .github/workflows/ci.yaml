@@ -46,7 +46,7 @@ jobs:
         uses: charmed-kubernetes/actions-operator@main
         with:
           provider: microk8s
-          bootstrap-options: "--agent-version 2.9.42"
+          bootstrap-options: "--agent-version 2.9.42 --constraints mem=1G"
       - name: Run integration bundle test
         run: tox run -e integration -- --junit-xml=pytest_report.xml
       - name: 'Foresight: Collect test results'
