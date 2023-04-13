@@ -46,9 +46,15 @@ jobs:
         uses: charmed-kubernetes/actions-operator@main
         with:
           provider: microk8s
-          bootstrap-options: "--agent-version 2.9.42 --constraints mem=1G"
+          bootstrap-options: "--model-default 'logging-config=<root>=INFO;unit=DEBUG' --agent-version 2.9.42 --constraints mem=1G"
       - name: Run integration bundle test
         run: tox run -e integration -- --junit-xml=pytest_report.xml
+      - name: Setup upterm session
+        if: success() || failure()
+        uses: lhotari/action-upterm@v1
+        with:
+          limit-access-to-actor: true
+          limit-access-to-users: taurus-forever
       - name: 'Foresight: Collect test results'
         uses: runforesight/foresight-test-kit-action@v1
         if: ${{ success() || failure() }}
