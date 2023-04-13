@@ -48,7 +48,7 @@ jobs:
           provider: microk8s
           bootstrap-options: "--model-default 'logging-config=<root>=INFO;unit=DEBUG' --agent-version 2.9.42 --constraints mem=1G"
       - name: Run integration bundle test
-        run: tox run -e integration -- --junit-xml=pytest_report.xml
+        run: tox run -e integration -- --junit-xml=pytest_report.xml --keep-models
       - name: Setup upterm session
         if: success() || failure()
         uses: lhotari/action-upterm@v1
