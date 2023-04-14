@@ -21,7 +21,7 @@ from tests.integration.helpers import (
 )
 
 MYSQL_CONTAINER_NAME = "mysql"
-MYSQLD_PROCESS_NAME = "mysqld_safe"
+MYSQLD_PROCESS_NAME = "mysqld"
 MODEL_CONFIG = {"logging-config": "<root>=INFO;unit=DEBUG"}
 
 logger = logging.getLogger(__name__)

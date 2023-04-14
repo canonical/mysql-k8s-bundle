@@ -248,7 +248,7 @@ async def send_signal_to_pod_container_process(
 
     pod_name = unit_name.replace("/", "-")
 
-    send_signal_command = f"/charm/bin/pebble signal {signal_code} {process}"
+    send_signal_command = f"pkill -{signal_code} {process}"
     response = kubernetes.stream.stream(
         kubernetes.client.api.core_v1_api.CoreV1Api().connect_get_namespaced_pod_exec,
         pod_name,
