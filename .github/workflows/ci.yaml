@@ -19,8 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: 'Foresight: Collect workflow telemetry'
-        uses: runforesight/foresight-workflow-kit-action@v1
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install tox
@@ -38,8 +36,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
-      - name: 'Foresight: Collect workflow telemetry'
-        uses: runforesight/foresight-workflow-kit-action@v1
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup operator environment
@@ -48,11 +44,4 @@ jobs:
           provider: microk8s
           bootstrap-options: "--agent-version 2.9.42"
       - name: Run integration bundle test
-        run: tox run -e integration -- --junit-xml=pytest_report.xml
-      - name: 'Foresight: Collect test results'
-        uses: runforesight/foresight-test-kit-action@v1
-        if: ${{ success() || failure() }}
-        with:
-          test_framework: PYTEST
-          test_format: JUNIT
-          test_path: pytest_report.xml
+        run: tox -e integration
