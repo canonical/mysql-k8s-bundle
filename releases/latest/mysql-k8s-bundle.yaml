@@ -3,7 +3,7 @@ applications:
     channel: 8.0/edge
     charm: mysql-k8s
     constraints: arch=amd64
-    revision: 65
+    revision: 78
     scale: 3
     trust: true
   mysql-router-k8s:
