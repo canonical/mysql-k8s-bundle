@@ -34,7 +34,7 @@ async def test_deploy_bundle(ops_test: OpsTest) -> None:
     async with ops_test.fast_forward():
         logger.info("Deploy MySQL K8s bundle and wait for up and running")
         await ops_test.model.deploy("./releases/latest/mysql-k8s-bundle.yaml", trust=True)
-        await ops_test.model.wait_for_idle(apps=[ROUTER_APP], status="waiting", timeout=5 * 60)
+        await ops_test.model.wait_for_idle(apps=[ROUTER_APP], status="blocked", timeout=5 * 60)
         await ops_test.model.wait_for_idle(
             apps=[MYSQL_APP, TLS_APP], status="active", timeout=15 * 60
         )
@@ -48,11 +48,12 @@ async def test_mysql_primary_switchover(ops_test: OpsTest):
     await ops_test.model.relate(f"{APPLICATION_APP}:database", f"{ROUTER_APP}:database")
     logger.info("Waiting for applications to become active")
     await ops_test.model.wait_for_idle(
-        apps=[MYSQL_APP, ROUTER_APP, APPLICATION_APP],
+        apps=[MYSQL_APP, APPLICATION_APP],
         status="active",
         raise_on_blocked=True,
         timeout=15 * 60,
     )
+    await ops_test.model.wait_for_idle(apps=[ROUTER_APP], status="active", timeout=5 * 60)
     # Start writes
     logger.info("Ensuring writes continue on all units")
     await ensure_all_units_continuous_writes_incrementing(ops_test)
