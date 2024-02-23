@@ -1,9 +1,10 @@
 # Canonical Distribution of MySQL + MySQLRouter
 
-[![Update](https://github.com/canonical/mysql-k8s-bundle/actions/workflows/on_bundle_update_available.yaml/badge.svg?branch=main)](https://github.com/canonical/mysql-k8s-bundle/actions/workflows/on_bundle_update_available.yaml?query=branch%3Amain)
+[![Charmhub](https://charmhub.io/mysql-k8s-bundle/badge.svg)](https://charmhub.io/mysql-k8s-bundle)
+[![Update bundle](https://github.com/canonical/mysql-k8s-bundle/actions/workflows/update_bundle.yaml/badge.svg)](https://github.com/canonical/mysql-k8s-bundle/actions/workflows/update_bundle.yaml)
 [![Tests](https://github.com/canonical/mysql-k8s-bundle/actions/workflows/ci.yaml/badge.svg?branch=main&event=schedule)](https://github.com/canonical/mysql-k8s-bundle/actions/workflows/ci.yaml?query=branch%3Amain+event%3Aschedule)
 [![Release](https://github.com/canonical/mysql-k8s-bundle/actions/workflows/release.yaml/badge.svg?branch=main&event=push)](https://github.com/canonical/mysql-k8s-bundle/actions/workflows/release.yaml?query=branch%3Amain+event%3Apush)
-[![Charmhub](https://charmhub.io/mysql-k8s-bundle/badge.svg)](https://charmhub.io/mysql-k8s-bundle)
+
 
 Welcome to the Canonical Distribution of MySQL + MySQLRouter.
 
