@@ -1,25 +1,59 @@
 applications:
+  data-integrator:
+    channel: latest/edge
+    charm: data-integrator
+    constraints: arch=amd64
+    revision: 27
+    scale: 1
+  grafana-agent-k8s:
+    channel: latest/edge
+    charm: grafana-agent-k8s
+    constraints: arch=amd64
+    revision: 80
+    scale: 1
+  mysql-router-data-integrator:
+    channel: latest/edge
+    charm: data-integrator
+    constraints: arch=amd64
+    revision: 27
+    scale: 1
   mysql-k8s:
     channel: 8.0/edge
     charm: mysql-k8s
     constraints: arch=amd64
-    revision: 88
+    revision: 160
     scale: 3
     trust: true
   mysql-router-k8s:
     channel: 8.0/edge
     charm: mysql-router-k8s
     constraints: arch=amd64
-    revision: 53
+    revision: 136
     scale: 1
-  tls-certificates-operator:
-    channel: latest/stable
-    charm: tls-certificates-operator
+    trust: true
+  mysql-test-app:
+    channel: latest/edge
+    charm: mysql-test-app
     constraints: arch=amd64
-    options:
-      ca-common-name: canonical
-      generate-self-signed-certificates: true
-    revision: 22
+    revision: 46
+    scale: 0
+  s3-integrator:
+    channel: latest/edge
+    charm: s3-integrator
+    constraints: arch=amd64
+    revision: 28
+    scale: 1
+  self-signed-certificates:
+    channel: latest/edge
+    charm: self-signed-certificates
+    constraints: arch=amd64
+    revision: 155
+    scale: 1
+  sysbench:
+    channel: latest/edge
+    charm: sysbench
+    constraints: arch=amd64
+    revision: 38
     scale: 1
 bundle: kubernetes
 description: MySQL operator bundle
@@ -29,6 +63,28 @@ relations:
 - - mysql-k8s:database
   - mysql-router-k8s:backend-database
 - - mysql-k8s:certificates
-  - tls-certificates-operator:certificates
+  - self-signed-certificates:certificates
+- - mysql-router-k8s:certificates
+  - self-signed-certificates:certificates
+- - mysql-k8s:s3-parameters
+  - s3-integrator:s3-credentials
+- - mysql-k8s:database
+  - data-integrator:mysql
+- - mysql-k8s:database
+  - sysbench:mysql
+- - mysql-k8s:grafana-dashboard
+  - grafana-agent-k8s:grafana-dashboards-consumer
+- - mysql-k8s:metrics-endpoint
+  - grafana-agent-k8s:metrics-endpoint
+- - mysql-k8s:logging
+  - grafana-agent-k8s:logging-provider
+- - mysql-router-k8s:database
+  - mysql-router-data-integrator:mysql
+- - mysql-router-k8s:grafana-dashboard
+  - grafana-agent-k8s:grafana-dashboards-consumer
+- - mysql-router-k8s:metrics-endpoint
+  - grafana-agent-k8s:metrics-endpoint
+- - mysql-router-k8s:logging
+  - grafana-agent-k8s:logging-provider
 source: https://github.com/canonical/mysql-k8s-bundle
 type: bundle
