@@ -42,6 +42,7 @@ jobs:
         uses: charmed-kubernetes/actions-operator@main
         with:
           provider: microk8s
-          bootstrap-options: "--agent-version 3.4.3"
+          channel: 1.30-strict/stable
+          bootstrap-options: "--agent-version 3.5.2"
       - name: Run integration bundle test
         run: tox -e integration
