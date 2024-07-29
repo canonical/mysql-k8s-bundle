@@ -30,19 +30,23 @@ jobs:
   integration-test:
     strategy:
       fail-fast: false
-    name: Integration tests (K8s)
-    needs:
-      - lint
-    runs-on: ubuntu-latest
-    timeout-minutes: 120
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup operator environment
-        uses: charmed-kubernetes/actions-operator@main
+      matrix:
+        juju:
+          - agent: 3.5.3  # renovate: juju-agent-pin-minor
+            juju-snap-channel: 3.5/stable
+            allure_on_amd64: true
+        architecture:
+          - amd64
+        name: Integration test bundle | ${{ matrix.juju.agent }}
+        needs:
+          - lint
+        uses: canonical/data-platform-workflows/.github/workflows/integration_test_charm.yaml@v17.0.1
         with:
-          provider: microk8s
-          channel: 1.30-strict/stable
-          bootstrap-options: "--agent-version 3.5.2"
-      - name: Run integration bundle test
-        run: tox -e integration
+          artifact-prefix: packed-charm-
+          architecture: ${{ matrix.architecture }}
+          cloud: microk8s
+          microk8s-snap-channel: 1.30-strict/stable  # renovate: latest microk8s
+          juju-agent-version: ${{ matrix.juju.agent }}
+          _beta_allure_report: ${{ matrix.juju.allure_on_amd64 && matrix.architecture == 'amd64' }}
+        permissions:
+          contents: write  # Needed for Allure Report beta

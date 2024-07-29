@@ -38,22 +38,20 @@ async def ensure_statuses(ops_test: OpsTest) -> None:
     """Ensure expected statuses of applications."""
     logger.info(f"Waiting for active: {', '.join(active_apps)}")
     await ops_test.model.block_until(
-        lambda: set([ops_test.model.applications[app].status for app in active_apps])
-        == {"active"},
+        lambda: {ops_test.model.applications[app].status for app in active_apps} == {"active"},
         timeout=TIMEOUT,
     )
 
     logger.info(f"Waiting for blocked: {', '.join(blocked_apps)}")
     await ops_test.model.block_until(
-        lambda: set([ops_test.model.applications[app].status for app in blocked_apps])
-        == {"blocked"},
+        lambda: {ops_test.model.applications[app].status for app in blocked_apps} == {"blocked"},
         timeout=SHORT_TIMEOUT,
     )
 
     if waiting_apps:
         logger.info(f"Waiting for waiting: {', '.join(waiting_apps)}")
         await ops_test.model.block_until(
-            lambda: set([ops_test.model.applications[app].status for app in waiting_apps])
+            lambda: {ops_test.model.applications[app].status for app in waiting_apps}
             == {"waiting"},
             timeout=SHORT_TIMEOUT,
         )
@@ -69,8 +67,13 @@ async def test_smoke(ops_test: OpsTest) -> None:
         await ensure_statuses(ops_test)
 
         logger.info("Configuring s3-integrator credentials")
-        await ops_test.model.applications["s3-integrator"].units[0].run_action(
-            action_name="sync-s3-credentials", **{"access-key": "access", "secret-key": "secret"}
+        await (
+            ops_test.model.applications["s3-integrator"]
+            .units[0]
+            .run_action(
+                action_name="sync-s3-credentials",
+                **{"access-key": "access", "secret-key": "secret"},
+            )
         )
 
         blocked_apps.remove("s3-integrator")
@@ -78,9 +81,9 @@ async def test_smoke(ops_test: OpsTest) -> None:
         await ensure_statuses(ops_test)
 
         logger.info("Configuring data-integrator")
-        await ops_test.model.applications["data-integrator"].set_config(
-            {"database-name": "mysql-database"}
-        )
+        await ops_test.model.applications["data-integrator"].set_config({
+            "database-name": "mysql-database"
+        })
 
         blocked_apps.remove("data-integrator")
         active_apps.append("data-integrator")
@@ -104,9 +107,9 @@ async def test_smoke(ops_test: OpsTest) -> None:
             assert "mysql-database" in databases
 
         logger.info("Configuring mysql-router-data-integrator")
-        await ops_test.model.applications["mysql-router-data-integrator"].set_config(
-            {"database-name": "mysql-router-database"}
-        )
+        await ops_test.model.applications["mysql-router-data-integrator"].set_config({
+            "database-name": "mysql-router-database"
+        })
 
         blocked_apps.remove("mysql-router-data-integrator")
         active_apps.append("mysql-router-data-integrator")
