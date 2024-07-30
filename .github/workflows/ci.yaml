@@ -31,7 +31,7 @@ jobs:
     uses: canonical/data-platform-workflows/.github/workflows/integration_test_charm.yaml@v17.0.1
     with:
       artifact-prefix: packed-charm-  # required input, but not used
-      architecture: ${{ matrix.architecture }}
+      architecture: amd64
       cloud: microk8s
       microk8s-snap-channel: 1.30-strict/stable  # renovate: latest microk8s
       juju-agent-version: ${{ matrix.juju.agent }}
