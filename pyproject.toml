@@ -5,7 +5,7 @@
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.8.10"
+python = "^3.8"
 
 [tool.poetry.group.format]
 optional = true
@@ -20,9 +20,6 @@ optional = true
 ruff = "^0.5.5"
 codespell = "2.3.0"
 
-[tool.poetry.group.integration]
-optional = true
-
 [tool.poetry.group.integration.dependencies]
 pytest = "^8.3.2"
 pytest-github-secrets = {git = "https://github.com/canonical/data-platform-workflows", tag = "v17.0.1", subdirectory = "python/pytest_plugins/github_secrets"}
@@ -31,8 +28,8 @@ pytest-operator-cache = {git = "https://github.com/canonical/data-platform-workf
 pytest-operator-groups = {git = "https://github.com/canonical/data-platform-workflows", tag = "v17.0.1", subdirectory = "python/pytest_plugins/pytest_operator_groups"}
 allure-pytest-collection-report = {git = "https://github.com/canonical/data-platform-workflows", tag = "v17.0.1", subdirectory = "python/pytest_plugins/allure_pytest_collection_report"}
 # renovate caret doesn't work: https://github.com/renovatebot/renovate/issues/26940
-juju = "<=3.5.2.0"
-mysql-connector-python = "8.0.33"
+juju = ">=3.5.2.0"
+mysql-connector-python = "~8.0.33"
 allure-pytest = "^2.13.5"
 
 # Testing tools configuration
@@ -53,7 +50,6 @@ markers = ["unstable"]
 # preview and explicit preview are enabled for CPY001
 preview = true
 target-version = "py38"
-src = ["src", "."]
 line-length = 99
 
 [tool.ruff.lint]
