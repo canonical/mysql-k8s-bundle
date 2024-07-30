@@ -58,6 +58,7 @@ async def ensure_statuses(ops_test: OpsTest) -> None:
 
 
 @pytest.mark.abort_on_fail
+@pytest.mark.group(1)
 async def test_smoke(ops_test: OpsTest) -> None:
     """Deploy bundle with apps and test various component integrations."""
     async with ops_test.fast_forward("5s"):
