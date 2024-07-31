@@ -21,10 +21,6 @@ jobs:
   integration-test:
     strategy:
       fail-fast: false
-      matrix:
-        juju:
-          - agent: 3.5.3  # renovate: juju-agent-pin-minor
-            juju-snap-channel: 3.5/stable
     name: Integration | ${{ matrix.juju.agent }}
     needs:
       - lint
@@ -34,7 +30,7 @@ jobs:
       architecture: amd64
       cloud: microk8s
       microk8s-snap-channel: 1.30-strict/stable  # renovate: latest microk8s
-      juju-agent-version: ${{ matrix.juju.agent }}
+      juju-agent-version: 3.5.3  # renovate: juju-agent-pin-minor
       _beta_allure_report: true
     permissions:
       contents: write  # Needed for Allure Report beta
