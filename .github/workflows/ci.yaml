@@ -16,33 +16,19 @@ on:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Install tox
-        # TODO: Consider replacing with custom image on self-hosted runner OR pinning version
-        run: python3 -m pip install tox
-      - name: Run linters
-        run: tox run -e lint
+    uses: canonical/data-platform-workflows/.github/workflows/lint.yaml@v17.0.1
 
   integration-test:
-    strategy:
-      fail-fast: false
-    name: Integration tests (K8s)
+    name: Integration
     needs:
       - lint
-    runs-on: ubuntu-latest
-    timeout-minutes: 120
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup operator environment
-        uses: charmed-kubernetes/actions-operator@main
-        with:
-          provider: microk8s
-          channel: 1.30-strict/stable
-          bootstrap-options: "--agent-version 3.5.2"
-      - name: Run integration bundle test
-        run: tox -e integration
+    uses: canonical/data-platform-workflows/.github/workflows/integration_test_charm.yaml@v17.0.1
+    with:
+      artifact-prefix: packed-charm-  # required input, but not used
+      architecture: amd64
+      cloud: microk8s
+      microk8s-snap-channel: 1.30-strict/stable  # renovate: latest microk8s
+      juju-agent-version: 3.5.3  # renovate: juju-agent-pin-minor
+      _beta_allure_report: true
+    permissions:
+      contents: write  # Needed for Allure Report beta
