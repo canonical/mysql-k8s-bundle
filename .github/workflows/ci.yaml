@@ -21,7 +21,7 @@ jobs:
   integration-test:
     strategy:
       fail-fast: false
-    name: Integration | ${{ matrix.juju.agent }}
+    name: Integration | 3.5.3
     needs:
       - lint
     uses: canonical/data-platform-workflows/.github/workflows/integration_test_charm.yaml@v17.0.1
