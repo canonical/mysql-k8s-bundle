@@ -19,9 +19,7 @@ jobs:
     uses: canonical/data-platform-workflows/.github/workflows/lint.yaml@v17.0.1
 
   integration-test:
-    strategy:
-      fail-fast: false
-    name: Integration | 3.5.3
+    name: Integration
     needs:
       - lint
     uses: canonical/data-platform-workflows/.github/workflows/integration_test_charm.yaml@v17.0.1
