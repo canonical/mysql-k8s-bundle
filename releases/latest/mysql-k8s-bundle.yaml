@@ -3,7 +3,7 @@ applications:
     channel: latest/edge
     charm: data-integrator
     constraints: arch=amd64
-    revision: 65
+    revision: 71
     scale: 1
   grafana-agent-k8s:
     channel: latest/edge
@@ -22,7 +22,7 @@ applications:
     channel: latest/edge
     charm: data-integrator
     constraints: arch=amd64
-    revision: 65
+    revision: 71
     scale: 1
   mysql-router-k8s:
     channel: 8.0/edge
@@ -47,13 +47,13 @@ applications:
     channel: latest/edge
     charm: self-signed-certificates
     constraints: arch=amd64
-    revision: 198
+    revision: 200
     scale: 1
   sysbench:
     channel: latest/edge
     charm: sysbench
     constraints: arch=amd64
-    revision: 76
+    revision: 78
     scale: 1
 bundle: kubernetes
 description: MySQL operator bundle
