@@ -9,13 +9,23 @@ applications:
     channel: latest/edge
     charm: grafana-agent-k8s
     constraints: arch=amd64
-    revision: 93
+    resources:
+      agent-image: 45
+        # oci-image: docker://registry.jujucharms.com/charm/dur5nnqi3zshmzyd98mvfj0x59lc2rznocih8/agent-image@sha256:cdd46dd3158cb40771de30add579630baad72b14f8fe3dabe230c7cf20f02c31
+        # oci-password: MDAxOGxvY2F0aW9uIGNoYXJtc3RvcmUKMDAzMGlkZW50aWZpZXIgOTBlODUwYWU2MzllNTZmMGU2OTc5MmYyOTQzZWY4ZDYKMDA0ZmNpZCBpcy1kb2NrZXItcmVwbyBjaGFybS9kdXI1bm5xaTN6c2htenlkOThtdmZqMHg1OWxjMnJ6bm9jaWg4L2FnZW50LWltYWdlCjAwMTNjaWQgYWxsb3cgcHVsbAowMDJmc2lnbmF0dXJlIO8xfo24bV2QBmGV8Sn+QfDsZhnE1XNANV1b7aLutZ/DCg
+        # oci-username: docker-registry
+    revision: 94
     scale: 1
   mysql-k8s:
     channel: 8.0/edge
     charm: mysql-k8s
     constraints: arch=amd64
-    revision: 201
+    resources:
+      mysql-image: 113
+        # oci-image: docker://registry.jujucharms.com/charm/62ptdfbrjpw3n9tcnswjpart30jauc6wc5wbi/mysql-image@sha256:704af773157fa6c36e5123cf04cac5375971c691b1411ab76cded596e8131dd3
+        # oci-password: MDAxOGxvY2F0aW9uIGNoYXJtc3RvcmUKMDAzMGlkZW50aWZpZXIgOTBlODUwYWU2MzllNTZmMGU2OTc5MmYyOTQzZWY4ZDYKMDA0ZmNpZCBpcy1kb2NrZXItcmVwbyBjaGFybS82MnB0ZGZicmpwdzNuOXRjbnN3anBhcnQzMGphdWM2d2M1d2JpL215c3FsLWltYWdlCjAwMTNjaWQgYWxsb3cgcHVsbAowMDJmc2lnbmF0dXJlIHj1JqCbvenHNXj5sZEaVddyBA8sErFPiGfMgTjm8nrGCg
+        # oci-username: docker-registry
+    revision: 206
     scale: 3
     trust: true
   mysql-router-data-integrator:
@@ -28,7 +38,12 @@ applications:
     channel: 8.0/edge
     charm: mysql-router-k8s
     constraints: arch=amd64
-    revision: 164
+    resources:
+      mysql-router-image: 57
+        # oci-image: docker://registry.jujucharms.com/charm/g78qli3013qicvevb3oj4z8u0zhjod1agws2d/mysql-router-image@sha256:89b8305613f6ce94f78a7c9b4baedef78f2816fd6bc74c00f6607bc5e57bd8e6
+        # oci-password: MDAxOGxvY2F0aW9uIGNoYXJtc3RvcmUKMDAzMGlkZW50aWZpZXIgOTBlODUwYWU2MzllNTZmMGU2OTc5MmYyOTQzZWY4ZDYKMDA1NmNpZCBpcy1kb2NrZXItcmVwbyBjaGFybS9nNzhxbGkzMDEzcWljdmV2YjNvajR6OHUwemhqb2QxYWd3czJkL215c3FsLXJvdXRlci1pbWFnZQowMDEzY2lkIGFsbG93IHB1bGwKMDAyZnNpZ25hdHVyZSAsi8Vsn42PXALgR05jlBMGo2I8O9wembBiQr7H/a8mqgo
+        # oci-username: docker-registry
+    revision: 167
     scale: 1
     trust: true
   mysql-test-app:
@@ -41,7 +56,7 @@ applications:
     channel: latest/edge
     charm: s3-integrator
     constraints: arch=amd64
-    revision: 59
+    revision: 65
     scale: 1
   self-signed-certificates:
     channel: latest/edge
@@ -53,7 +68,7 @@ applications:
     channel: latest/edge
     charm: sysbench
     constraints: arch=amd64
-    revision: 78
+    revision: 83
     scale: 1
 bundle: kubernetes
 description: MySQL operator bundle
