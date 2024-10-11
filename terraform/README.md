@@ -20,7 +20,6 @@ This is a Terraform module facilitating the deployment of Charmed MySQL K8s in i
 | `mysql_backup_endpoint` | Backup endpoint for the MySQL operator | `string` | `""` | yes |
 | `mysql_backup_region` | Backup region for the MySQL operator | `string` | `""` | yes |
 | `mysql_backup_secret_key` | Backup secret key for the MySQL operator | `string` | `""` | yes |
-| `mysql_charm_base` | Charm OS bases for the MySQL operator | `string` | `"ubuntu@22.04"` | no |
 | `mysql_charm_channel` | Charm channel for the MySQL operator | `string` | `"8.0/stable"` | no |
 | `mysql_charm_config` | Configuration options for the MySQL operator | `map(string)` | `{}` | no |
 | `mysql_charm_units` | Number of units for the MySQL operator | `number` | `3` | no |
