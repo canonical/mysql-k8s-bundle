@@ -1,5 +1,5 @@
 module "mysql" {
-  source          = "git::https://github.com/paulomach/terraform-modules//modules/k8s/mysql?ref=feature/feature-sync-pg-mysql"
+  source          = "git::https://github.com/canonical/mysql-k8s-operator//terraform?ref=feature/tf-module"
   juju_model_name = var.model_name
   channel         = var.mysql_charm_channel
   revision        = local.mysql_revisions[var.arch]
