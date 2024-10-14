@@ -62,7 +62,7 @@ applications:
     channel: latest/edge
     charm: self-signed-certificates
     constraints: arch=amd64
-    revision: 200
+    revision: 202
     scale: 1
   sysbench:
     channel: latest/edge
