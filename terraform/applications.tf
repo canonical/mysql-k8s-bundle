@@ -2,7 +2,7 @@ module "mysql" {
   source          = "git::https://github.com/canonical/mysql-k8s-operator//terraform?ref=feature/tf-module"
   juju_model_name = var.model_name
   channel         = var.mysql_charm_channel
-  revision        = local.mysql_revisions[var.arch]
+  revision        = coalesce(var.mysql_charm_revision, local.mysql_revisions[var.arch])
   config          = var.mysql_charm_config
   storage_size    = var.mysql_storage_size
   units           = var.mysql_charm_units
@@ -17,7 +17,7 @@ resource "juju_application" "backups_s3_integrator" {
   charm {
     name     = "s3-integrator"
     channel  = var.s3_integrator_charm_channel
-    revision = local.s3_integrator_revisions[var.arch]
+    revision = coalesce(var.s3_integrator_charm_revision, local.s3_integrator_revisions[var.arch])
   }
 
   config = {
@@ -46,7 +46,7 @@ resource "juju_application" "mysql_router" {
   charm {
     name     = "mysql-router-k8s"
     channel  = var.mysql_router_charm_channel
-    revision = local.mysql_router_revisions[var.arch]
+    revision = coalesce(var.mysql_router_charm_revision, local.mysql_router_revisions[var.arch])
   }
 }
 
@@ -58,7 +58,7 @@ resource "juju_application" "data_integrator" {
   charm {
     name     = "data-integrator"
     channel  = var.data_integrator_charm_channel
-    revision = local.data_integrator_revisions[var.arch]
+    revision = coalesce(var.data_integrator_charm_revision, local.data_integrator_revisions[var.arch])
   }
 
   config = {
@@ -68,20 +68,17 @@ resource "juju_application" "data_integrator" {
   units = 1
 }
 
-resource "juju_application" "self_signed_certificates" {
+resource "juju_application" "certificates" {
   count = var.enable_tls ? 1 : 0
-  name  = "self-signed-certificates"
+  name  = "certificates"
   model = var.model_name
 
   charm {
-    name     = "self-signed-certificates"
-    channel  = var.self_signed_certificates_charm_channel
-    revision = local.tls_revisions[var.arch]
+    name     = var.certificates_charm_name
+    channel  = var.certificates_charm_channel
+    revision = coalesce(var.certificates_charm_revision, local.tls_revisions[var.arch])
   }
 
-  config = {
-    ca-common-name = "${module.mysql.application_name} CA"
-  }
-
-  units = 1
+  config = var.certificates_charm_config
+  units  = 1
 }

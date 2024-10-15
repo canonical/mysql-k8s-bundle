@@ -114,9 +114,51 @@ variable "s3_integrator_charm_channel" {
 }
 
 
-variable "self_signed_certificates_charm_channel" {
+variable "certificates_charm_channel" {
   description = "Self Signed Certificates Operator charm channel"
   type        = string
   default     = "latest/stable"
+}
+
+variable "mysql_charm_revision" {
+  description = "MySQL charm revision override"
+  type        = number
+  default     = null
+}
+
+variable "mysql_router_charm_revision" {
+  description = "MySQL router charm revision override"
+  type        = number
+  default     = null
+}
+
+variable "s3_integrator_charm_revision" {
+  description = "s3_integrator charm revision override"
+  type        = number
+  default     = null
+}
+
+variable "certificates_charm_revision" {
+  description = "Certificates charm revision override"
+  type        = number
+  default     = null
+}
+
+variable "certificates_charm_name" {
+  description = "Certificates charm name"
+  type        = string
+  default     = "self-signed-certificates"
+}
+
+variable "certificates_charm_config" {
+  description = "Certificates charm configuration"
+  type        = map(string)
+  default     = { ca-common-name = "MySQL CA" }
+}
+
+variable "data_integrator_charm_revision" {
+  description = "data-integrator charm revision override"
+  type        = number
+  default     = null
 }
 
