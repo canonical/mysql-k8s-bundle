@@ -1,5 +1,5 @@
 module "mysql" {
-  source          = "git::https://github.com/canonical/mysql-k8s-operator//terraform?ref=feature/tf-module"
+  source          = "git::https://github.com/canonical/mysql-k8s-operator//terraform?ref=main"
   juju_model_name = var.model_name
   channel         = var.mysql_charm_channel
   revision        = coalesce(var.mysql_charm_revision, local.mysql_revisions[var.arch])
