@@ -56,7 +56,7 @@ applications:
     channel: latest/edge
     charm: s3-integrator
     constraints: arch=amd64
-    revision: 65
+    revision: 73
     scale: 1
   self-signed-certificates:
     channel: latest/edge
@@ -68,7 +68,7 @@ applications:
     channel: latest/edge
     charm: sysbench
     constraints: arch=amd64
-    revision: 87
+    revision: 93
     scale: 1
 bundle: kubernetes
 description: MySQL operator bundle
