@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"Deploy bundle with apps and test various component integrations.","293311","test_smoke","tests.integration","Wed Nov 13 01:24:14 UTC 2024","failed","Wed Nov 13 01:29:07 UTC 2024","","test_smoke","",""
