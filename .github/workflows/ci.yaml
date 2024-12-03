@@ -28,7 +28,7 @@ jobs:
       architecture: amd64
       cloud: microk8s
       microk8s-snap-channel: 1.31-strict/stable  # renovate: latest microk8s
-      juju-agent-version: 3.5.4  # renovate: juju-agent-pin-minor
+      juju-agent-version: 3.5.5  # renovate: juju-agent-pin-minor
       _beta_allure_report: true
     permissions:
       contents: write  # Needed for Allure Report beta
