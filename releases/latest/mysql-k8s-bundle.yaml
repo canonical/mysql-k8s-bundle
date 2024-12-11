@@ -21,11 +21,11 @@ applications:
     charm: mysql-k8s
     constraints: arch=amd64
     resources:
-      mysql-image: 113
-        # oci-image: docker://registry.jujucharms.com/charm/62ptdfbrjpw3n9tcnswjpart30jauc6wc5wbi/mysql-image@sha256:704af773157fa6c36e5123cf04cac5375971c691b1411ab76cded596e8131dd3
+      mysql-image: 114
+        # oci-image: docker://registry.jujucharms.com/charm/62ptdfbrjpw3n9tcnswjpart30jauc6wc5wbi/mysql-image@sha256:aa4d9b21673d2c6e4db3dc943179bae95dd8d355790b68e4e0610da9513ee6c9
         # oci-password: MDAxOGxvY2F0aW9uIGNoYXJtc3RvcmUKMDAzMGlkZW50aWZpZXIgOTBlODUwYWU2MzllNTZmMGU2OTc5MmYyOTQzZWY4ZDYKMDA0ZmNpZCBpcy1kb2NrZXItcmVwbyBjaGFybS82MnB0ZGZicmpwdzNuOXRjbnN3anBhcnQzMGphdWM2d2M1d2JpL215c3FsLWltYWdlCjAwMTNjaWQgYWxsb3cgcHVsbAowMDJmc2lnbmF0dXJlIHj1JqCbvenHNXj5sZEaVddyBA8sErFPiGfMgTjm8nrGCg
         # oci-username: docker-registry
-    revision: 208
+    revision: 210
     scale: 3
     trust: true
   mysql-router-data-integrator:
@@ -56,13 +56,13 @@ applications:
     channel: latest/edge
     charm: s3-integrator
     constraints: arch=amd64
-    revision: 85
+    revision: 87
     scale: 1
   self-signed-certificates:
     channel: latest/edge
     charm: self-signed-certificates
     constraints: arch=amd64
-    revision: 214
+    revision: 218
     scale: 1
   sysbench:
     channel: latest/edge
