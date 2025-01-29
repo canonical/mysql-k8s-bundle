@@ -3,7 +3,7 @@ applications:
     channel: latest/edge
     charm: data-integrator
     constraints: arch=amd64
-    revision: 80
+    revision: 88
     scale: 1
   grafana-agent-k8s:
     channel: latest/edge
@@ -25,14 +25,14 @@ applications:
         # oci-image: docker://registry.jujucharms.com/charm/62ptdfbrjpw3n9tcnswjpart30jauc6wc5wbi/mysql-image@sha256:aa4d9b21673d2c6e4db3dc943179bae95dd8d355790b68e4e0610da9513ee6c9
         # oci-password: MDAxOGxvY2F0aW9uIGNoYXJtc3RvcmUKMDAzMGlkZW50aWZpZXIgOTBlODUwYWU2MzllNTZmMGU2OTc5MmYyOTQzZWY4ZDYKMDA0ZmNpZCBpcy1kb2NrZXItcmVwbyBjaGFybS82MnB0ZGZicmpwdzNuOXRjbnN3anBhcnQzMGphdWM2d2M1d2JpL215c3FsLWltYWdlCjAwMTNjaWQgYWxsb3cgcHVsbAowMDJmc2lnbmF0dXJlIHj1JqCbvenHNXj5sZEaVddyBA8sErFPiGfMgTjm8nrGCg
         # oci-username: docker-registry
-    revision: 210
+    revision: 221
     scale: 3
     trust: true
   mysql-router-data-integrator:
     channel: latest/edge
     charm: data-integrator
     constraints: arch=amd64
-    revision: 80
+    revision: 88
     scale: 1
   mysql-router-k8s:
     channel: 8.0/edge
@@ -43,7 +43,7 @@ applications:
         # oci-image: docker://registry.jujucharms.com/charm/g78qli3013qicvevb3oj4z8u0zhjod1agws2d/mysql-router-image@sha256:aa4d9b21673d2c6e4db3dc943179bae95dd8d355790b68e4e0610da9513ee6c9
         # oci-password: MDAxOGxvY2F0aW9uIGNoYXJtc3RvcmUKMDAzMGlkZW50aWZpZXIgOTBlODUwYWU2MzllNTZmMGU2OTc5MmYyOTQzZWY4ZDYKMDA1NmNpZCBpcy1kb2NrZXItcmVwbyBjaGFybS9nNzhxbGkzMDEzcWljdmV2YjNvajR6OHUwemhqb2QxYWd3czJkL215c3FsLXJvdXRlci1pbWFnZQowMDEzY2lkIGFsbG93IHB1bGwKMDAyZnNpZ25hdHVyZSAsi8Vsn42PXALgR05jlBMGo2I8O9wembBiQr7H/a8mqgo
         # oci-username: docker-registry
-    revision: 572
+    revision: 587
     scale: 1
     trust: true
   mysql-test-app:
@@ -56,7 +56,7 @@ applications:
     channel: latest/edge
     charm: s3-integrator
     constraints: arch=amd64
-    revision: 99
+    revision: 108
     scale: 1
   self-signed-certificates:
     channel: latest/edge
