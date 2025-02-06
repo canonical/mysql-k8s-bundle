@@ -16,13 +16,13 @@ on:
 jobs:
   lint:
     name: Lint
-    uses: canonical/data-platform-workflows/.github/workflows/lint.yaml@v24.0.6
+    uses: canonical/data-platform-workflows/.github/workflows/lint.yaml@v29.1.0
 
   integration-test:
     name: Integration
     needs:
       - lint
-    uses: canonical/data-platform-workflows/.github/workflows/integration_test_charm.yaml@v24.0.6
+    uses: canonical/data-platform-workflows/.github/workflows/integration_test_charm.yaml@v29.1.0
     with:
       artifact-prefix: packed-charm-  # required input, but not used
       architecture: amd64
