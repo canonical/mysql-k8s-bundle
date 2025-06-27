@@ -1,10 +1,22 @@
 # Copyright 2023 Canonical Ltd.
 # See LICENSE file for licensing details.
 
-from typing import Dict
+from typing import Dict, Optional
 
 from juju.unit import Unit
 from pytest_operator.plugin import OpsTest
+
+
+async def get_leader_unit(ops_test: OpsTest, app_name: str) -> Optional[Unit]:
+    """Get the leader unit of a given application.
+
+    Args:
+        ops_test: The ops test framework instance
+        app_name: The name of the application
+    """
+    for unit in ops_test.model.applications[app_name].units:
+        if await unit.is_leader_from_status():
+            return unit
 
 
 async def get_unit_ip(ops_test: OpsTest, unit_name: str) -> str:

@@ -11,7 +11,7 @@ import pytest
 from pytest_operator.plugin import OpsTest
 
 from .connector import MysqlConnector
-from .helpers import get_credentials, get_unit_ip
+from .helpers import get_credentials, get_leader_unit, get_unit_ip
 
 waiting_apps = [
     "mysql-router-k8s",
@@ -91,14 +91,14 @@ async def test_smoke(ops_test: OpsTest) -> None:
         await ensure_statuses(ops_test)
 
         logger.info("Confirming data-integrator's database exists")
-        mysql_unit = ops_test.model.applications["mysql-k8s"].units[0]
-        mysql_unit_address = await get_unit_ip(ops_test, mysql_unit.name)
-        server_config_credentials = await get_credentials(mysql_unit, "serverconfig")
+        mysql_leader = await get_leader_unit(ops_test, "mysql-k8s")
+        mysql_leader_address = await get_unit_ip(ops_test, mysql_leader.name)
+        server_config_credentials = await get_credentials(mysql_leader, "serverconfig")
 
         database_config = {
             "user": server_config_credentials["username"],
             "password": server_config_credentials["password"],
-            "host": mysql_unit_address,
+            "host": mysql_leader_address,
             "raise_on_warnings": False,
         }
 
