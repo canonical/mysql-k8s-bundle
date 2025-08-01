@@ -93,6 +93,8 @@ relations:
   - grafana-agent-k8s:metrics-endpoint
 - - mysql-k8s:logging
   - grafana-agent-k8s:logging-provider
+- - mysql-k8s:mysql-root
+  - mysql-test-app:mysql
 - - mysql-router-k8s:database
   - mysql-router-data-integrator:mysql
 - - mysql-router-k8s:grafana-dashboard
