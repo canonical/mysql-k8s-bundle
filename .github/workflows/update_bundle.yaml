@@ -12,6 +12,6 @@ jobs:
     uses: canonical/data-platform-workflows/.github/workflows/_update_bundle.yaml@v35.0.2
     with:
       path-to-bundle-file: releases/latest/mysql-k8s-bundle.yaml
-      reviewers: canonical/data-platform-mysql
+      reviewers: canonical/data-mysql
     secrets:
       token: ${{ secrets.PAT }}
