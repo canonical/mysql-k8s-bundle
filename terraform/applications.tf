@@ -1,84 +1,51 @@
-module "mysql" {
-  source          = "git::https://github.com/canonical/mysql-k8s-operator//terraform?ref=main"
-  juju_model_name = var.model_name
-  channel         = var.mysql_charm_channel
-  revision        = coalesce(var.mysql_charm_revision, local.mysql_revisions[var.arch])
-  config          = var.mysql_charm_config
-  storage_size    = var.mysql_storage_size
-  units           = var.mysql_charm_units
-  constraints     = "arch=${var.arch}"
-}
-
-resource "juju_application" "backups_s3_integrator" {
-  name  = "backups-s3-integrator"
-  model = var.model_name
-  trust = true
-
-  charm {
-    name     = "s3-integrator"
-    channel  = var.s3_integrator_charm_channel
-    revision = coalesce(var.s3_integrator_charm_revision, local.s3_integrator_revisions[var.arch])
-  }
-
-  config = {
-    endpoint     = var.mysql_backup_endpoint
-    bucket       = var.mysql_backup_bucket_name
-    path         = var.model_name
-    region       = var.mysql_backup_region
-    s3-uri-style = "path"
-  }
-
-  units = 1
-
-  provisioner "local-exec" {
-    # There's currently no way to wait for the charm to be idle, hence the wait-for
-    # https://github.com/juju/terraform-provider-juju/issues/202
-    command = "juju wait-for application ${self.name} --query='name==\"${self.name}\" && status==\"blocked\"'; $([ $(juju version | cut -d. -f1) = '3' ] && echo 'juju run' || echo 'juju run-action') ${self.name}/leader sync-s3-credentials access-key=${var.mysql_backup_access_key} secret-key=${var.mysql_backup_secret_key}"
-  }
-}
-
-resource "juju_application" "mysql_router" {
-  count = var.data_integrator_enabled ? 1 : 0
-  name  = "mysql-router"
-  model = var.model_name
-  trust = true
-
-  charm {
-    name     = "mysql-router-k8s"
-    channel  = var.mysql_router_charm_channel
-    revision = coalesce(var.mysql_router_charm_revision, local.mysql_router_revisions[var.arch])
-  }
-}
-
-resource "juju_application" "data_integrator" {
-  count = var.data_integrator_enabled ? 1 : 0
-  name  = "data-integrator"
-  model = var.model_name
-
-  charm {
-    name     = "data-integrator"
-    channel  = var.data_integrator_charm_channel
-    revision = coalesce(var.data_integrator_charm_revision, local.data_integrator_revisions[var.arch])
-  }
-
-  config = {
-    database-name = var.data_integrator_database_name
-  }
-
-  units = 1
-}
+# Copyright 2025 Canonical Ltd.
+# See LICENSE file for licensing details.
 
 resource "juju_application" "certificates" {
-  count = var.enable_tls ? 1 : 0
-  name  = "certificates"
-  model = var.model_name
+  count = local.tls_enabled ? 1 : 0
 
   charm {
-    name     = var.certificates_charm_name
-    channel  = var.certificates_charm_channel
-    revision = coalesce(var.certificates_charm_revision, local.tls_revisions[var.arch])
+    name     = "self-signed-certificates"
+    base     = var.certificates.base
+    channel  = var.certificates.channel
+    revision = var.certificates.revision
   }
 
-  config = var.certificates_charm_config
-  units  = 1
+  model       = var.model
+  name        = var.certificates.app_name
+  config      = var.certificates.config
+  constraints = var.certificates.constraints
+  units       = var.certificates.units
+}
+
+resource "juju_application" "grafana_agent" {
+  count = local.cos_enabled ? 1 : 0
+
+  charm {
+    name     = "grafana-agent-k8s"
+    base     = var.grafana_agent.base
+    channel  = var.grafana_agent.channel
+    revision = var.grafana_agent.revision
+  }
+
+  model       = var.model
+  name        = var.grafana_agent.app_name
+  config      = var.grafana_agent.config
+  constraints = var.grafana_agent.constraints
+  units       = var.grafana_agent.units
+}
+
+resource "juju_application" "s3_integrator" {
+  charm {
+    name     = "s3-integrator"
+    base     = var.s3_integrator.base
+    channel  = var.s3_integrator.channel
+    revision = var.s3_integrator.revision
+  }
+
+  model       = var.model
+  name        = var.s3_integrator.app_name
+  config      = var.s3_integrator.config
+  constraints = var.s3_integrator.constraints
+  units       = var.s3_integrator.units
 }
