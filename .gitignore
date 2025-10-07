@@ -2,6 +2,8 @@
 *__pycache__
 .pytest_cache
 .tox
+.terraform
+.terraform.lock.hcl
+
 build/
 venv/
-
