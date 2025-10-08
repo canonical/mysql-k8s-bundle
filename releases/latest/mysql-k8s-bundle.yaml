@@ -53,7 +53,7 @@ applications:
     revision: 74
     scale: 0
   s3-integrator:
-    channel: latest/edge
+    channel: 1/edge
     charm: s3-integrator
     constraints: arch=amd64
     revision: 155
