@@ -1,10 +1,20 @@
 # Copyright 2023 Canonical Ltd.
 # See LICENSE file for licensing details.
 
-from typing import Dict, Optional
+from typing import (
+    Dict,
+    List,
+    Optional,
+    Set,
+)
 
 from juju.unit import Unit
 from pytest_operator.plugin import OpsTest
+
+
+def get_app_statuses(ops_test: OpsTest, app_names: List[str]) -> Set[str]:
+    """Get statuses of applications."""
+    return {ops_test.model.applications[app].status for app in app_names}
 
 
 async def get_leader_unit(ops_test: OpsTest, app_name: str) -> Optional[Unit]:

@@ -4,10 +4,8 @@
 output "app_names" {
   description = "Names of of all deployed applications."
   value = {
-    mysql_server  = module.mysql_server.app_name
-    mysql_router  = module.mysql_router.app_name
-    certificates  = juju_application.certificates[0].name
-    grafana_agent = juju_application.grafana_agent[0].name
+    mysql_server = module.mysql_server.app_name
+    mysql_router = module.mysql_router.app_name
   }
 }
 

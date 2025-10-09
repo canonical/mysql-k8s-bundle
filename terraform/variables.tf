@@ -14,6 +14,8 @@ variable "cos_offers" {
     logging   = optional(string, null),
     tracing   = optional(string, null)
   })
+
+  default = {}
 }
 
 variable "tls_offer" {
@@ -34,6 +36,8 @@ variable "mysql_server" {
     revision    = optional(number, null)
     units       = optional(number, 3)
   })
+
+  default = {}
 }
 
 variable "mysql_router" {
@@ -43,11 +47,13 @@ variable "mysql_router" {
     base        = optional(string, "ubuntu@22.04")
     channel     = optional(string, "8.0/stable")
     config      = optional(map(string), {})
-    constraints = optional(string, "arch=amd64")
+    constraints = optional(string, "")
     resources   = optional(map(string), {})
     revision    = optional(number, null)
     units       = optional(number, 1)
   })
+
+  default = {}
 }
 
 variable "certificates" {
@@ -62,6 +68,8 @@ variable "certificates" {
     revision    = optional(number, null)
     units       = optional(number, 1)
   })
+
+  default = {}
 
   validation {
     condition     = var.certificates.units == 1
@@ -82,6 +90,8 @@ variable "grafana_agent" {
     units       = optional(number, 1)
   })
 
+  default = {}
+
   validation {
     condition     = var.grafana_agent.units == 1
     error_message = "Units count should be 1"
@@ -100,6 +110,8 @@ variable "s3_integrator" {
     revision    = optional(number, null)
     units       = optional(number, 1)
   })
+
+  default = {}
 
   validation {
     condition     = var.s3_integrator.units == 1
