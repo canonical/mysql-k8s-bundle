@@ -41,7 +41,7 @@ resource "juju_integration" "mysql_server_certificates" {
   }
   application {
     name     = juju_application.certificates[0].name
-    endpoint = "certificates"
+    endpoint = var.tls_offer
   }
 }
 
@@ -54,8 +54,8 @@ resource "juju_integration" "mysql_server_cos_dashboard" {
     endpoint = module.mysql_server.provides.grafana_dashboard
   }
   application {
-    name     = juju_application.grafana_agent[0].name
-    endpoint = "grafana-dashboards-consumer"
+    name     = juju_application.observability[0].name
+    endpoint = var.cos_offers.dashboard
   }
 }
 
@@ -68,8 +68,8 @@ resource "juju_integration" "mysql_server_cos_metrics" {
     endpoint = module.mysql_server.provides.metrics_endpoint
   }
   application {
-    name     = juju_application.grafana_agent[0].name
-    endpoint = "metrics-endpoint"
+    name     = juju_application.observability[0].name
+    endpoint = var.cos_offers.metrics
   }
 }
 
@@ -85,7 +85,7 @@ resource "juju_integration" "mysql_router_certificates" {
   }
   application {
     name     = juju_application.certificates[0].name
-    endpoint = "certificates"
+    endpoint = var.tls_offer
   }
 }
 
@@ -98,8 +98,8 @@ resource "juju_integration" "mysql_router_cos_dashboard" {
     endpoint = module.mysql_router.provides.grafana_dashboard
   }
   application {
-    name     = juju_application.grafana_agent[0].name
-    endpoint = "grafana-dashboards-consumer"
+    name     = juju_application.observability[0].name
+    endpoint = var.cos_offers.dashboard
   }
 }
 
@@ -112,7 +112,7 @@ resource "juju_integration" "mysql_router_cos_metrics" {
     endpoint = module.mysql_router.provides.metrics_endpoint
   }
   application {
-    name     = juju_application.grafana_agent[0].name
-    endpoint = "metrics-endpoint"
+    name     = juju_application.observability[0].name
+    endpoint = var.cos_offers.metrics
   }
 }

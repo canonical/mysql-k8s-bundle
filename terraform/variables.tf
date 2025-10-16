@@ -9,9 +9,9 @@ variable "model" {
 variable "cos_offers" {
   description = "COS provider offers to be used on client relations."
   type = object({
-    dashboard = optional(string, null),
-    metrics   = optional(string, null),
-    logging   = optional(string, null),
+    dashboard = optional(string, null)
+    metrics   = optional(string, null)
+    logging   = optional(string, null)
     tracing   = optional(string, null)
   })
 
@@ -77,8 +77,8 @@ variable "certificates" {
   }
 }
 
-variable "grafana_agent" {
-  description = "Defines the Grafana agent application configuration"
+variable "observability" {
+  description = "Defines the observability application configuration"
   type = object({
     app_name    = optional(string, "grafana-agent-k8s")
     base        = optional(string, "ubuntu@22.04")
@@ -93,7 +93,7 @@ variable "grafana_agent" {
   default = {}
 
   validation {
-    condition     = var.grafana_agent.units == 1
+    condition     = var.observability.units == 1
     error_message = "Units count should be 1"
   }
 }
