@@ -12,8 +12,9 @@ module "mysql_server" {
   app_name    = var.mysql_server.app_name
   base        = var.mysql_server.base
   channel     = var.mysql_server.channel
-  revision    = var.mysql_server.revision
+  config      = var.mysql_server.config
   constraints = var.mysql_server.constraints
+  revision    = var.mysql_server.revision
   units       = var.mysql_server.units
 }
 
@@ -23,7 +24,8 @@ module "mysql_router" {
   app_name    = var.mysql_router.app_name
   base        = var.mysql_router.base
   channel     = var.mysql_router.channel
-  revision    = var.mysql_router.revision
+  config      = var.mysql_router.config
   constraints = var.mysql_router.constraints
+  revision    = var.mysql_router.revision
   units       = var.mysql_router.units
 }

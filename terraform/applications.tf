@@ -5,7 +5,7 @@ resource "juju_application" "certificates" {
   count = local.tls_enabled ? 1 : 0
 
   charm {
-    name     = "self-signed-certificates"
+    name     = var.certificates.app_name
     base     = var.certificates.base
     channel  = var.certificates.channel
     revision = var.certificates.revision
@@ -18,21 +18,21 @@ resource "juju_application" "certificates" {
   units       = var.certificates.units
 }
 
-resource "juju_application" "grafana_agent" {
+resource "juju_application" "observability" {
   count = local.cos_enabled ? 1 : 0
 
   charm {
-    name     = "grafana-agent-k8s"
-    base     = var.grafana_agent.base
-    channel  = var.grafana_agent.channel
-    revision = var.grafana_agent.revision
+    name     = var.observability.app_name
+    base     = var.observability.base
+    channel  = var.observability.channel
+    revision = var.observability.revision
   }
 
   model       = var.model
-  name        = var.grafana_agent.app_name
-  config      = var.grafana_agent.config
-  constraints = var.grafana_agent.constraints
-  units       = var.grafana_agent.units
+  name        = var.observability.app_name
+  config      = var.observability.config
+  constraints = var.observability.constraints
+  units       = var.observability.units
 }
 
 resource "juju_application" "s3_integrator" {
