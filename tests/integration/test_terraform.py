@@ -44,11 +44,16 @@ async def ensure_statuses(ops_test: OpsTest) -> None:
 
 @pytest.mark.abort_on_fail
 @pytest.mark.group(1)
-async def test_terraform_install(ops_test: OpsTest) -> None:
-    """Install terraform binary."""
+async def test_snap_install(ops_test: OpsTest) -> None:
+    """Install necessary binaries."""
     logger.info("Installing terraform binary")
     subprocess.check_call(
         ["sudo", "snap", "install", "terraform", "--classic"],
+    )
+
+    logger.info("Installing YQ binary")
+    subprocess.check_call(
+        ["sudo", "snap", "install", "yq"],
     )
 
 
@@ -56,13 +61,24 @@ async def test_terraform_install(ops_test: OpsTest) -> None:
 @pytest.mark.group(1)
 async def test_terraform(ops_test: OpsTest) -> None:
     """Deploy terraform module with app."""
+    model_info = subprocess.check_output(
+        ["juju", "show-model", ops_test.model.name],
+        text=True,
+        input=None,
+    )
+    model_uuid = subprocess.check_output(
+        ["yq", f'."{ops_test.model.name}"."model-uuid"'],
+        text=True,
+        input=model_info,
+    ).strip()
+
     logger.info("Deploying terraform module")
     subprocess.check_call(
         ["terraform", "init"],
         cwd="terraform",
     )
     subprocess.check_call(
-        ["terraform", "apply", "-auto-approve", "-var", f"model={ops_test.model.name}"],
+        ["terraform", "apply", "-auto-approve", "-var", f"model={model_uuid}"],
         cwd="terraform",
     )
 
