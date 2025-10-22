@@ -11,7 +11,7 @@ resource "juju_application" "certificates" {
     revision = var.certificates.revision
   }
 
-  model       = var.model
+  model_uuid  = var.model
   name        = var.certificates.app_name
   config      = var.certificates.config
   constraints = var.certificates.constraints
@@ -28,7 +28,7 @@ resource "juju_application" "observability" {
     revision = var.observability.revision
   }
 
-  model       = var.model
+  model_uuid  = var.model
   name        = var.observability.app_name
   config      = var.observability.config
   constraints = var.observability.constraints
@@ -43,7 +43,7 @@ resource "juju_application" "s3_integrator" {
     revision = var.s3_integrator.revision
   }
 
-  model       = var.model
+  model_uuid  = var.model
   name        = var.s3_integrator.app_name
   config      = var.s3_integrator.config
   constraints = var.s3_integrator.constraints
