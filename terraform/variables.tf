@@ -2,7 +2,7 @@
 # See LICENSE file for licensing details.
 
 variable "model" {
-  description = "Juju model to deploy to"
+  description = "UUID of the juju model to deploy to"
   type        = string
 }
 
