@@ -3,7 +3,7 @@ applications:
     channel: latest/edge
     charm: data-integrator
     constraints: arch=amd64
-    revision: 295
+    revision: 301
     scale: 1
   grafana-agent-k8s:
     channel: 1/edge
@@ -32,7 +32,7 @@ applications:
     channel: latest/edge
     charm: data-integrator
     constraints: arch=amd64
-    revision: 295
+    revision: 301
     scale: 1
   mysql-router-k8s:
     channel: 8.0/edge
