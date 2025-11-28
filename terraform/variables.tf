@@ -60,8 +60,8 @@ variable "certificates" {
   description = "Defines the certificates application configuration"
   type = object({
     app_name    = optional(string, "self-signed-certificates")
-    base        = optional(string, "ubuntu@22.04")
-    channel     = optional(string, "latest/stable")
+    base        = optional(string, "ubuntu@24.04")
+    channel     = optional(string, "1/stable")
     config      = optional(map(string), { "ca-common-name" : "CA" })
     constraints = optional(string, "arch=amd64")
     resources   = optional(map(string), {})
