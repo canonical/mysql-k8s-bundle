@@ -1,0 +1,286 @@
+[33mWARNING [0m juju.client.connection:connection.py:858 unexpected facade SSHServer received from the controller
+[32mINFO    [0m pytest_operator.plugin:plugin.py:766 Connecting to existing model microk8s-localhost:test on unspecified cloud
+[33mWARNING [0m juju.client.connection:connection.py:858 unexpected facade SSHServer received from the controller
+[33mWARNING [0m juju.client.connection:connection.py:858 unexpected facade SSHSession received from the controller
+[33mWARNING [0m juju.client.connection:connection.py:858 unexpected facade SSHTunneler received from the controller
+[33mWARNING [0m juju.client.connection:connection.py:858 unexpected facade SSHServer received from the controller
+[32mINFO    [0m integration.test_bundle:test_bundle.py:69 Deploying bundle
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: upload charm data-integrator from channel latest/edge
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: upload charm mysql-router-k8s from channel 8.0/edge
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: upload charm mysql-test-app from channel latest/edge
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: upload charm s3-integrator from channel 1/edge
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: upload charm self-signed-certificates from channel 1/edge
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: upload charm sysbench from channel latest/edge
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: upload charm grafana-agent-k8s from channel 1/edge
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: upload charm mysql-k8s from channel 8.0/edge
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: deploy application data-integrator with 1 unit using $addCharm-0
+[32mINFO    [0m juju.model:__init__.py:2301 Deploying ch:amd64/noble/data-integrator-295
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: deploy application mysql-router-k8s with 1 unit using $addCharm-11
+[32mINFO    [0m juju.model:__init__.py:2301 Deploying ch:amd64/jammy/mysql-router-k8s-851
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: deploy application mysql-test-app using $addCharm-14
+[32mINFO    [0m juju.model:__init__.py:2301 Deploying ch:amd64/jammy/mysql-test-app-85
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: deploy application s3-integrator with 1 unit using $addCharm-17
+[32mINFO    [0m juju.model:__init__.py:2301 Deploying ch:amd64/jammy/s3-integrator-255
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: deploy application self-signed-certificates with 1 unit using $addCharm-20
+[32mINFO    [0m juju.model:__init__.py:2301 Deploying ch:amd64/jammy/self-signed-certificates-455
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: deploy application sysbench with 1 unit using $addCharm-23
+[32mINFO    [0m juju.model:__init__.py:2301 Deploying ch:amd64/jammy/sysbench-209
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: deploy application grafana-agent-k8s with 1 unit using $addCharm-3
+[32mINFO    [0m juju.model:__init__.py:2301 Deploying ch:amd64/jammy/grafana-agent-k8s-168
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: deploy application mysql-k8s with 3 units using $addCharm-6
+[32mINFO    [0m juju.model:__init__.py:2301 Deploying ch:amd64/jammy/mysql-k8s-328
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: deploy application mysql-router-data-integrator with 1 unit using $addCharm-0
+[32mINFO    [0m juju.model:__init__.py:2301 Deploying ch:amd64/noble/data-integrator-295
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: add relation $deploy-7:database - $deploy-12:backend-database
+[32mINFO    [0m juju.bundle:bundle.py:929 Relating mysql-k8s:database <-> mysql-router-k8s:backend-database
+[33mWARNING [0m juju.model:__init__.py:1683 relate is deprecated and will be removed. Use integrate instead.
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: add relation $deploy-7:certificates - $deploy-21:certificates
+[32mINFO    [0m juju.bundle:bundle.py:929 Relating mysql-k8s:certificates <-> self-signed-certificates:certificates
+[33mWARNING [0m juju.model:__init__.py:1683 relate is deprecated and will be removed. Use integrate instead.
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: add relation $deploy-12:certificates - $deploy-21:certificates
+[32mINFO    [0m juju.bundle:bundle.py:929 Relating mysql-router-k8s:certificates <-> self-signed-certificates:certificates
+[33mWARNING [0m juju.model:__init__.py:1683 relate is deprecated and will be removed. Use integrate instead.
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: add relation $deploy-7:s3-parameters - $deploy-18:s3-credentials
+[32mINFO    [0m juju.bundle:bundle.py:929 Relating mysql-k8s:s3-parameters <-> s3-integrator:s3-credentials
+[33mWARNING [0m juju.model:__init__.py:1683 relate is deprecated and will be removed. Use integrate instead.
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: add relation $deploy-7:database - $deploy-1:mysql
+[32mINFO    [0m juju.bundle:bundle.py:929 Relating mysql-k8s:database <-> data-integrator:mysql
+[33mWARNING [0m juju.model:__init__.py:1683 relate is deprecated and will be removed. Use integrate instead.
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: add relation $deploy-7:database - $deploy-24:mysql
+[32mINFO    [0m juju.bundle:bundle.py:929 Relating mysql-k8s:database <-> sysbench:mysql
+[33mWARNING [0m juju.model:__init__.py:1683 relate is deprecated and will be removed. Use integrate instead.
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: add relation $deploy-7:grafana-dashboard - $deploy-4:grafana-dashboards-consumer
+[32mINFO    [0m juju.bundle:bundle.py:929 Relating mysql-k8s:grafana-dashboard <-> grafana-agent-k8s:grafana-dashboards-consumer
+[33mWARNING [0m juju.model:__init__.py:1683 relate is deprecated and will be removed. Use integrate instead.
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: add relation $deploy-7:metrics-endpoint - $deploy-4:metrics-endpoint
+[32mINFO    [0m juju.bundle:bundle.py:929 Relating mysql-k8s:metrics-endpoint <-> grafana-agent-k8s:metrics-endpoint
+[33mWARNING [0m juju.model:__init__.py:1683 relate is deprecated and will be removed. Use integrate instead.
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: add relation $deploy-7:logging - $deploy-4:logging-provider
+[32mINFO    [0m juju.bundle:bundle.py:929 Relating mysql-k8s:logging <-> grafana-agent-k8s:logging-provider
+[33mWARNING [0m juju.model:__init__.py:1683 relate is deprecated and will be removed. Use integrate instead.
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: add relation $deploy-12:database - $deploy-9:mysql
+[32mINFO    [0m juju.bundle:bundle.py:929 Relating mysql-router-k8s:database <-> mysql-router-data-integrator:mysql
+[33mWARNING [0m juju.model:__init__.py:1683 relate is deprecated and will be removed. Use integrate instead.
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: add relation $deploy-12:grafana-dashboard - $deploy-4:grafana-dashboards-consumer
+[32mINFO    [0m juju.bundle:bundle.py:929 Relating mysql-router-k8s:grafana-dashboard <-> grafana-agent-k8s:grafana-dashboards-consumer
+[33mWARNING [0m juju.model:__init__.py:1683 relate is deprecated and will be removed. Use integrate instead.
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: add relation $deploy-12:metrics-endpoint - $deploy-4:metrics-endpoint
+[32mINFO    [0m juju.bundle:bundle.py:929 Relating mysql-router-k8s:metrics-endpoint <-> grafana-agent-k8s:metrics-endpoint
+[33mWARNING [0m juju.model:__init__.py:1683 relate is deprecated and will be removed. Use integrate instead.
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: add relation $deploy-12:logging - $deploy-4:logging-provider
+[32mINFO    [0m juju.bundle:bundle.py:929 Relating mysql-router-k8s:logging <-> grafana-agent-k8s:logging-provider
+[33mWARNING [0m juju.model:__init__.py:1683 relate is deprecated and will be removed. Use integrate instead.
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: set annotations for $deploy-9
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: set annotations for $deploy-12
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: set annotations for $deploy-15
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: set annotations for $deploy-18
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: set annotations for $deploy-1
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: set annotations for $deploy-21
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: set annotations for $deploy-24
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: set annotations for $deploy-4
+[32mINFO    [0m juju.bundle:bundle.py:461 Applying change: set annotations for $deploy-7
+[32mINFO    [0m integration.test_bundle:test_bundle.py:44 Waiting for active: mysql-k8s, self-signed-certificates, sysbench
+[32mINFO    [0m integration.test_bundle:test_bundle.py:50 Waiting for blocked: data-integrator, grafana-agent-k8s, mysql-router-data-integrator, s3-integrator
+[32mINFO    [0m integration.test_bundle:test_bundle.py:57 Waiting for waiting: mysql-router-k8s
+[32mINFO    [0m integration.test_bundle:test_bundle.py:74 Configuring s3-integrator credentials
+[32mINFO    [0m integration.test_bundle:test_bundle.py:44 Waiting for active: mysql-k8s, self-signed-certificates, sysbench, s3-integrator
+[32mINFO    [0m integration.test_bundle:test_bundle.py:50 Waiting for blocked: data-integrator, grafana-agent-k8s, mysql-router-data-integrator
+[32mINFO    [0m integration.test_bundle:test_bundle.py:57 Waiting for waiting: mysql-router-k8s
+[32mINFO    [0m integration.test_bundle:test_bundle.py:88 Configuring data-integrator
+[32mINFO    [0m integration.test_bundle:test_bundle.py:44 Waiting for active: mysql-k8s, self-signed-certificates, sysbench, s3-integrator, data-integrator
+[32mINFO    [0m integration.test_bundle:test_bundle.py:50 Waiting for blocked: grafana-agent-k8s, mysql-router-data-integrator
+[32mINFO    [0m integration.test_bundle:test_bundle.py:57 Waiting for waiting: mysql-router-k8s
+[32mINFO    [0m integration.test_bundle:test_bundle.py:97 Confirming data-integrator's database exists
+[32mINFO    [0m mysql.connector:authentication.py:66 package: mysql.connector.plugins
+[32mINFO    [0m mysql.connector:authentication.py:67 plugin_name: caching_sha2_password
+[32mINFO    [0m mysql.connector:authentication.py:71 AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin
+[32mINFO    [0m integration.test_bundle:test_bundle.py:114 Configuring mysql-router-data-integrator
+[32mINFO    [0m integration.test_bundle:test_bundle.py:44 Waiting for active: mysql-k8s, self-signed-certificates, sysbench, s3-integrator, data-integrator, mysql-router-data-integrator, mysql-router-k8s
+[32mINFO    [0m integration.test_bundle:test_bundle.py:50 Waiting for blocked: grafana-agent-k8s
+[32mINFO    [0m integration.test_bundle:test_bundle.py:126 Confirming data-integrator's database exists
+[32mINFO    [0m integration.test_bundle:test_bundle.py:132 Adding mysql-test-app unit
+[33mWARNING [0m juju.application:application.py:195 adding units to a container-based model not supported, auto-switching to scale
+[32mINFO    [0m integration.test_bundle:test_bundle.py:44 Waiting for active: mysql-k8s, self-signed-certificates, sysbench, s3-integrator, data-integrator, mysql-router-data-integrator, mysql-router-k8s
+[32mINFO    [0m integration.test_bundle:test_bundle.py:50 Waiting for blocked: grafana-agent-k8s
+[32mINFO    [0m integration.test_bundle:test_bundle.py:57 Waiting for waiting: mysql-test-app
+[32mINFO    [0m pytest_operator.plugin:plugin.py:903 Model status:
+
+Model  Controller          Cloud/Region        Version  SLA          Timestamp
+test   microk8s-localhost  microk8s/localhost  3.6.12   unsupported  01:31:21Z
+
+App                           Version                  Status   Scale  Charm                     Channel      Rev  Address         Exposed  Message
+data-integrator                                        active       1  data-integrator           latest/edge  295  10.152.183.48   no       
+grafana-agent-k8s             0.40.4                   blocked      1  grafana-agent-k8s         1/edge       168  10.152.183.36   no       Missing ['grafana-cloud-config']|['grafana-dashboards-provider'] for grafana-dashboards-consumer; ['grafana-cloud-con...
+mysql-k8s                     8.0.42-0ubuntu0.22.04.2  waiting      3  mysql-k8s                 8.0/edge     328  10.152.183.61   no       installing agent
+mysql-router-data-integrator                           waiting      1  data-integrator           latest/edge  295  10.152.183.57   no       installing agent
+mysql-router-k8s              8.0.42                   active       1  mysql-router-k8s          8.0/edge     851  10.152.183.149  no       
+mysql-test-app                                         waiting    0/1  mysql-test-app            latest/edge   85  10.152.183.221  no       installing agent
+s3-integrator                                          active       1  s3-integrator             1/edge       255  10.152.183.67   no       
+self-signed-certificates                               active       1  self-signed-certificates  1/edge       455  10.152.183.139  no       
+sysbench                                               active       1  sysbench                  latest/edge  209  10.152.183.59   no       
+
+Unit                             Workload  Agent       Address       Ports  Message
+data-integrator/0*               active    idle        10.1.106.137         
+grafana-agent-k8s/0*             blocked   idle        10.1.106.151         Missing ['grafana-cloud-config']|['grafana-dashboards-provider'] for grafana-dashboards-consumer; ['grafana-cloud-con...
+mysql-k8s/0                      active    executing   10.1.106.146         
+mysql-k8s/1                      active    executing   10.1.106.147         
+mysql-k8s/2*                     active    executing   10.1.106.148         Primary
+mysql-router-data-integrator/0*  active    idle        10.1.106.141         
+mysql-router-k8s/0*              active    executing   10.1.106.139         
+mysql-test-app/0                 waiting   allocating                       installing agent
+s3-integrator/0*                 active    idle        10.1.106.138         
+self-signed-certificates/0*      active    idle        10.1.106.140         
+sysbench/0*                      active    idle        10.1.106.142         
+
+[32mINFO    [0m pytest_operator.plugin:plugin.py:909 Juju error logs:
+
+unit-mysql-k8s-2: 01:29:14 ERROR unit.mysql-k8s/2.juju-log Missing S3 parameters: ['bucket', 'access-key', 'secret-key']
+unit-mysql-k8s-2: 01:29:35 ERROR unit.mysql-k8s/2.juju-log database:18: Failed to execute mysql-shell command
+Traceback (most recent call last):
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/src/mysql_k8s_helpers.py", line 714, in _run_mysqlsh_script
+    stdout, _ = process.wait_output()
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/ops/pebble.py", line 1771, in wait_output
+    raise ExecError[AnyStr](self._command, exit_code, out_value, err_value)
+ops.pebble.ExecError: non-zero exit code 1 executing ['/usr/bin/mysqlsh', '--passwords-from-stdin', '--uri=serverconfig@mysql-k8s-2.mysql-k8s-endpoints.test.svc.cluster.local.:33062', '--python', '--verbose=0', '-c', 'shell.options.set(\'useWizards\', False)\nprint(\'###\')\nshell.connect_to_primary()\nsession.run_sql("CREATE ROLE `charmed_dba_sysbench-db_00`;")\nsession.run_sql("CREATE DATABASE `sysbench-db`;")\nsession.run_sql("GRANT SELECT ON `sysbench-db`.* TO charmed_read;")\nsession.run_sql("GRANT SELECT, INSERT, DELETE, UPDATE ON `sysbench-db`.* TO charmed_dml;")\nsession.run_sql("GRANT SELECT, INSERT, DELETE, UPDATE, EXECUTE ON `sysbench-db`.* TO charmed_dba_sysbench-db_00;")\nsession.run_sql("GRANT ALTER, ALTER ROUTINE, CREATE, CREATE ROUTINE, CREATE VIEW, DROP, INDEX, LOCK TABLES, REFERENCES, TRIGGER ON `sysbench-db`.* TO charmed_dba_sysbench-db_00;")'], stdout="\x1b[1mPlease provide the password for 'serverconfig@mysql-k8s-2.mysql-k8s-endpoints.test.svc.cluster.local.:33062': \x1b[0m###\n", stderr='Cannot set LC_ALL to locale en_US.UTF-8: No such file or directory\n\x1b[36mNOTE: \x1b[0mAlready connected to a PRIMARY.\nTraceback (most recent call last):\n  File "<string>", line 8, in <module>\nmysqlsh.DBError: MySQL Error (1064): ClassicSession.run_sql: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'-db_00\' at line 1\n'
+unit-mysql-k8s-2: 01:29:35 ERROR unit.mysql-k8s/2.juju-log database:18: Failed to create application database sysbench-db
+unit-mysql-k8s-2: 01:30:40 ERROR unit.mysql-k8s/2.juju-log s3-parameters:16: Failed to read content from S3 bucket=relation-16, path=group_replication_id.txt
+Traceback (most recent call last):
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/lib/charms/mysql/v0/s3_helpers.py", line 154, in _read_content_from_s3
+    bucket.download_fileobj(content_path, buf)
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/boto3/s3/inject.py", line 843, in bucket_download_fileobj
+    return self.meta.client.download_fileobj(
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/boto3/s3/inject.py", line 801, in download_fileobj
+    return future.result()
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/s3transfer/futures.py", line 103, in result
+    return self._coordinator.result()
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/s3transfer/futures.py", line 266, in result
+    raise self._exception
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/s3transfer/tasks.py", line 269, in _main
+    self._submit(transfer_future=transfer_future, **kwargs)
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/s3transfer/download.py", line 354, in _submit
+    response = client.head_object(
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/botocore/client.py", line 565, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/botocore/client.py", line 1021, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.exceptions.ClientError: An error occurred (403) when calling the HeadObject operation: Forbidden
+unit-mysql-k8s-2: 01:30:41 ERROR unit.mysql-k8s/2.juju-log s3-parameters:16: Failed to upload content to S3 bucket=relation-16, path=group_replication_id.txt
+Traceback (most recent call last):
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/boto3/s3/transfer.py", line 371, in upload_file
+    future.result()
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/s3transfer/futures.py", line 103, in result
+    return self._coordinator.result()
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/s3transfer/futures.py", line 266, in result
+    raise self._exception
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/s3transfer/tasks.py", line 139, in __call__
+    return self._execute_main(kwargs)
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/s3transfer/tasks.py", line 162, in _execute_main
+    return_value = self._main(**kwargs)
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/s3transfer/upload.py", line 764, in _main
+    client.put_object(Bucket=bucket, Key=key, Body=body, **extra_args)
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/botocore/client.py", line 565, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/botocore/client.py", line 1021, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.exceptions.ClientError: An error occurred (InvalidAccessKeyId) when calling the PutObject operation: The AWS Access Key Id you provided does not exist in our records.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/lib/charms/mysql/v0/s3_helpers.py", line 124, in upload_content_to_s3
+    bucket.upload_file(temp_file.name, content_path)
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/boto3/s3/inject.py", line 235, in bucket_upload_file
+    return self.meta.client.upload_file(
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/boto3/s3/inject.py", line 145, in upload_file
+    return transfer.upload_file(
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/boto3/s3/transfer.py", line 377, in upload_file
+    raise S3UploadFailedError(
+boto3.exceptions.S3UploadFailedError: Failed to upload /tmp/tmp1j6wfjaw to relation-16/group_replication_id.txt: An error occurred (InvalidAccessKeyId) when calling the PutObject operation: The AWS Access Key Id you provided does not exist in our records.
+unit-mysql-k8s-2: 01:30:48 ERROR unit.mysql-k8s/2.juju-log database:17: Failed to execute mysql-shell command
+Traceback (most recent call last):
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/src/mysql_k8s_helpers.py", line 714, in _run_mysqlsh_script
+    stdout, _ = process.wait_output()
+  File "/var/lib/juju/agents/unit-mysql-k8s-2/charm/venv/lib/python3.10/site-packages/ops/pebble.py", line 1771, in wait_output
+    raise ExecError[AnyStr](self._command, exit_code, out_value, err_value)
+ops.pebble.ExecError: non-zero exit code 1 executing ['/usr/bin/mysqlsh', '--passwords-from-stdin', '--uri=serverconfig@mysql-k8s-2.mysql-k8s-endpoints.test.svc.cluster.local.:33062', '--python', '--verbose=0', '-c', 'shell.options.set(\'useWizards\', False)\nprint(\'###\')\nshell.connect_to_primary()\nsession.run_sql("CREATE ROLE `charmed_dba_mysql-database_00`;")\nsession.run_sql("CREATE DATABASE `mysql-database`;")\nsession.run_sql("GRANT SELECT ON `mysql-database`.* TO charmed_read;")\nsession.run_sql("GRANT SELECT, INSERT, DELETE, UPDATE ON `mysql-database`.* TO charmed_dml;")\nsession.run_sql("GRANT SELECT, INSERT, DELETE, UPDATE, EXECUTE ON `mysql-database`.* TO charmed_dba_mysql-database_00;")\nsession.run_sql("GRANT ALTER, ALTER ROUTINE, CREATE, CREATE ROUTINE, CREATE VIEW, DROP, INDEX, LOCK TABLES, REFERENCES, TRIGGER ON `mysql-database`.* TO charmed_dba_mysql-database_00;")'], stdout="\x1b[1mPlease provide the password for 'serverconfig@mysql-k8s-2.mysql-k8s-endpoints.test.svc.cluster.local.:33062': \x1b[0m###\n", stderr='Cannot set LC_ALL to locale en_US.UTF-8: No such file or directory\n\x1b[36mNOTE: \x1b[0mAlready connected to a PRIMARY.\nTraceback (most recent call last):\n  File "<string>", line 8, in <module>\nmysqlsh.DBError: MySQL Error (1064): ClassicSession.run_sql: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'-database_00\' at line 1\n'
+unit-mysql-k8s-2: 01:30:48 ERROR unit.mysql-k8s/2.juju-log database:17: Failed to create application database mysql-database
+unit-mysql-router-k8s-0: 01:31:04 ERROR unit.mysql-router-k8s/0.juju-log database:22: common.mysql_shell:Failed to run MySQL Shell script:
+import json
+import mysqlsh
+import traceback
+
+try:
+    # Disable wizards in this script, since it will be invoked without --no-wizard
+    shell.options.set('useWizards', False)
+    session.run_sql("CREATE ROLE `charmed_dba_mysql-router-data_00`")
+    session.run_sql("CREATE DATABASE `mysql-router-database`")
+    session.run_sql("GRANT SELECT, INSERT, DELETE, UPDATE, EXECUTE ON `mysql-router-database`.* TO charmed_dba_mysql-router-data_00")
+    session.run_sql("GRANT ALTER, ALTER ROUTINE, CREATE, CREATE ROUTINE, CREATE VIEW, DROP, INDEX, LOCK TABLES, REFERENCES, TRIGGER ON `mysql-router-database`.* TO charmed_dba_mysql-router-data_00")
+    session.run_sql("GRANT SELECT ON `mysql-router-database`.* TO charmed_read")
+    session.run_sql("GRANT SELECT, INSERT, DELETE, UPDATE ON `mysql-router-database`.* TO charmed_dml")
+
+except mysqlsh.DBError as exception:
+    error = {
+        "message": str(exception),
+        "code": exception.code,
+        "traceback_message": "".join(traceback.format_exception(exception)),
+    }
+else:
+    error = None
+with open("/tmp/mysqlsh_error.json", "w") as file:
+    json.dump(error, file)
+
+MySQL client error 1064
+MySQL Shell traceback:
+Traceback (most recent call last):
+  File "<string>", line 10, in <module>
+mysqlsh.DBError: MySQL Error (1064): ClassicSession.run_sql: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-router-data_00' at line 1
+
+Traceback (most recent call last):
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/common/mysql_shell/__init__.py", line 99, in _run_code
+    raise ShellDBError(**exception)
+common.mysql_shell.ShellDBError: MySQL Error (1064): ClassicSession.run_sql: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-router-data_00' at line 1
+unit-mysql-router-k8s-0: 01:31:04 ERROR unit.mysql-router-k8s/0.juju-log database:22: root:Uncaught exception while in charm code:
+Traceback (most recent call last):
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/src/charm.py", line 470, in <module>
+    ops.main.main(KubernetesRouterCharm)
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/ops/main.py", line 436, in main
+    _emit_charm_event(charm, dispatcher.event_name)
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/ops/main.py", line 144, in _emit_charm_event
+    event_to_emit.emit(*args, **kwargs)
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/ops/framework.py", line 351, in emit
+    framework._emit(event)
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/ops/framework.py", line 853, in _emit
+    self._reemit(event_path)
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/ops/framework.py", line 942, in _reemit
+    custom_handler(event)
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/common/_charm_libs/charms/data_platform_libs/v0/data_interfaces.py", line 2900, in _on_relation_changed_event
+    getattr(self.on, "database_requested").emit(
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/ops/framework.py", line 351, in emit
+    framework._emit(event)
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/ops/framework.py", line 853, in _emit
+    self._reemit(event_path)
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/ops/framework.py", line 942, in _reemit
+    custom_handler(event)
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/lib/charms/tempo_coordinator_k8s/v0/charm_tracing.py", line 735, in wrapped_function
+    return callable(*args, **kwargs)  # type: ignore
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/common/abstract_charm.py", line 336, in reconcile
+    self._database_provides.reconcile_users(
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/lib/charms/tempo_coordinator_k8s/v0/charm_tracing.py", line 735, in wrapped_function
+    return callable(*args, **kwargs)  # type: ignore
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/common/relations/database_provides.py", line 273, in reconcile_users
+    relation.create_database_and_user(
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/common/relations/database_provides.py", line 124, in create_database_and_user
+    password = shell.create_application_database(
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/common/mysql_shell/__init__.py", line 214, in create_application_database
+    self._create_application_database(database=database)
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/common/mysql_shell/__init__.py", line 197, in _create_application_database
+    self._run_sql(statements)
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/common/mysql_shell/__init__.py", line 112, in _run_sql
+    self._run_code(
+  File "/var/lib/juju/agents/unit-mysql-router-k8s-0/charm/venv/lib/python3.10/site-packages/common/mysql_shell/__init__.py", line 99, in _run_code
+    raise ShellDBError(**exception)
+common.mysql_shell.ShellDBError: MySQL Error (1064): ClassicSession.run_sql: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-router-data_00' at line 1
+unit-mysql-router-k8s-0: 01:31:05 ERROR juju.worker.uniter.operation hook "database-relation-changed" (via hook dispatching script: dispatch) failed: exit status 1
+
+[32mINFO    [0m pytest_operator.plugin:plugin.py:991 Forgetting model main...
