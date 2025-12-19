@@ -1,0 +1,30 @@
+[32mINFO    [0m integration.test_terraform:test_terraform.py:75 Deploying terraform module
+[32mINFO    [0m integration.test_terraform:test_terraform.py:31 Waiting for active: mysql-k8s
+[32mINFO    [0m integration.test_terraform:test_terraform.py:38 Waiting for blocked: mysql-router-k8s, s3-integrator
+[32mINFO    [0m integration.test_terraform:test_terraform.py:94 Configuring s3-integrator credentials
+[32mINFO    [0m integration.test_terraform:test_terraform.py:31 Waiting for active: mysql-k8s, s3-integrator
+[32mINFO    [0m integration.test_terraform:test_terraform.py:38 Waiting for blocked: mysql-router-k8s
+[32mINFO    [0m pytest_operator.plugin:plugin.py:903 Model status:
+
+Model  Controller          Cloud/Region        Version  SLA          Timestamp
+test   microk8s-localhost  microk8s/localhost  3.6.12   unsupported  01:29:05Z
+
+App               Version                  Status   Scale  Charm             Channel     Rev  Address         Exposed  Message
+mysql-k8s         8.0.41-0ubuntu0.22.04.1  waiting      3  mysql-k8s         8.0/stable  255  10.152.183.167  no       installing agent
+mysql-router-k8s  8.0.41-0ubuntu0.22.04.1  blocked      1  mysql-router-k8s  8.0/stable  748  10.152.183.244  no       Missing relation: database
+s3-integrator                              waiting      1  s3-integrator     1/edge      255  10.152.183.190  no       installing agent
+
+Unit                 Workload  Agent      Address      Ports  Message
+mysql-k8s/0*         active    executing  10.1.206.79         Primary
+mysql-k8s/1          waiting   idle       10.1.206.81         waiting to get cluster primary from peers
+mysql-k8s/2          waiting   idle       10.1.206.80         waiting to get cluster primary from peers
+mysql-router-k8s/0*  active    idle       10.1.206.73         
+s3-integrator/0*     active    idle       10.1.206.74         
+
+[32mINFO    [0m pytest_operator.plugin:plugin.py:909 Juju error logs:
+
+controller-0: 01:27:20 ERROR juju.worker.caasapplicationprovisioner.runner exited "mysql-router-k8s": more than 20 retries ensuring scale: k8s: statefulsets.apps "mysql-router-k8s" not found
+controller-0: 01:27:24 ERROR juju.worker.caasapplicationprovisioner.runner exited "s3-integrator": more than 20 retries ensuring trust: updating application "s3-integrator" to desired trust false: getting service account role "s3-integrator": k8s: roles.rbac.authorization.k8s.io "s3-integrator" not found
+controller-0: 01:27:25 ERROR juju.worker.caasapplicationprovisioner.runner exited "mysql-k8s": more than 20 retries ensuring trust: updating application "mysql-k8s" to desired trust true: getting service account role "mysql-k8s": k8s: roles.rbac.authorization.k8s.io "mysql-k8s" not found
+
+[32mINFO    [0m pytest_operator.plugin:plugin.py:991 Forgetting model main...
