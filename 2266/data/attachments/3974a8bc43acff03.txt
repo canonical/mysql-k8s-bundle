@@ -1,0 +1,71 @@
+[32mINFO    [0m integration.test_terraform:test_terraform.py:75 Deploying terraform module
+[33mWARNING [0m juju.client.connection:connection.py:579 RPC: Connection closed, reconnecting
+[33mWARNING [0m juju.client.connection:connection.py:493 Receiver: Connection closed, reconnecting
+[1m[31mERROR   [0m asyncio:base_events.py:1821 Task exception was never retrieved
+future: <Task finished name='Task-77' coro=<Connection.reconnect() done, defined at /home/runner/work/mysql-k8s-bundle/mysql-k8s-bundle/.tox/integration/lib/python3.12/site-packages/juju/client/connection.py:697> exception=ProxyNotConnectedError()>
+Traceback (most recent call last):
+  File "/home/runner/work/mysql-k8s-bundle/mysql-k8s-bundle/.tox/integration/lib/python3.12/site-packages/juju/client/connection.py", line 709, in reconnect
+    res = await connector(
+          ^^^^^^^^^^^^^^^^
+  File "/home/runner/work/mysql-k8s-bundle/mysql-k8s-bundle/.tox/integration/lib/python3.12/site-packages/juju/client/connection.py", line 800, in _connect_with_login
+    await self._connect(endpoints)
+  File "/home/runner/work/mysql-k8s-bundle/mysql-k8s-bundle/.tox/integration/lib/python3.12/site-packages/juju/client/connection.py", line 743, in _connect
+    result = await task
+             ^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/tasks.py", line 631, in _wait_for_one
+    return f.result()  # May raise f.exception().
+           ^^^^^^^^^^
+  File "/home/runner/work/mysql-k8s-bundle/mysql-k8s-bundle/.tox/integration/lib/python3.12/site-packages/juju/client/connection.py", line 729, in _try_endpoint
+    return await self._open(endpoint, cacert)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/mysql-k8s-bundle/mysql-k8s-bundle/.tox/integration/lib/python3.12/site-packages/juju/client/connection.py", line 328, in _open
+    sock = self.proxy.socket()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/mysql-k8s-bundle/mysql-k8s-bundle/.tox/integration/lib/python3.12/site-packages/juju/client/proxy/kubernetes/proxy.py", line 80, in socket
+    raise ProxyNotConnectedError()
+juju.client.proxy.proxy.ProxyNotConnectedError
+[1m[31mERROR   [0m asyncio:base_events.py:1821 Task exception was never retrieved
+future: <Task finished name='Task-75' coro=<Connection.reconnect() done, defined at /home/runner/work/mysql-k8s-bundle/mysql-k8s-bundle/.tox/integration/lib/python3.12/site-packages/juju/client/connection.py:697> exception=ProxyNotConnectedError()>
+Traceback (most recent call last):
+  File "/home/runner/work/mysql-k8s-bundle/mysql-k8s-bundle/.tox/integration/lib/python3.12/site-packages/juju/client/connection.py", line 709, in reconnect
+    res = await connector(
+          ^^^^^^^^^^^^^^^^
+  File "/home/runner/work/mysql-k8s-bundle/mysql-k8s-bundle/.tox/integration/lib/python3.12/site-packages/juju/client/connection.py", line 800, in _connect_with_login
+    await self._connect(endpoints)
+  File "/home/runner/work/mysql-k8s-bundle/mysql-k8s-bundle/.tox/integration/lib/python3.12/site-packages/juju/client/connection.py", line 743, in _connect
+    result = await task
+             ^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/tasks.py", line 631, in _wait_for_one
+    return f.result()  # May raise f.exception().
+           ^^^^^^^^^^
+  File "/home/runner/work/mysql-k8s-bundle/mysql-k8s-bundle/.tox/integration/lib/python3.12/site-packages/juju/client/connection.py", line 729, in _try_endpoint
+    return await self._open(endpoint, cacert)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/mysql-k8s-bundle/mysql-k8s-bundle/.tox/integration/lib/python3.12/site-packages/juju/client/connection.py", line 328, in _open
+    sock = self.proxy.socket()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/mysql-k8s-bundle/mysql-k8s-bundle/.tox/integration/lib/python3.12/site-packages/juju/client/proxy/kubernetes/proxy.py", line 80, in socket
+    raise ProxyNotConnectedError()
+juju.client.proxy.proxy.ProxyNotConnectedError
+[1m[31mERROR   [0m juju.client.connection:connection.py:587 RPC: Automatic reconnect failed
+[32mINFO    [0m pytest_operator.plugin:plugin.py:903 Model status:
+
+Model  Controller          Cloud/Region        Version  SLA          Timestamp
+test   microk8s-localhost  microk8s/localhost  3.6.12   unsupported  01:32:50Z
+
+App               Version                  Status       Scale  Charm             Channel     Rev  Address         Exposed  Message
+mysql-k8s         8.0.41-0ubuntu0.22.04.1  maintenance      3  mysql-k8s         8.0/stable  255  10.152.183.208  no       Creating cluster
+mysql-router-k8s  8.0.41-0ubuntu0.22.04.1  blocked          1  mysql-router-k8s  8.0/stable  748  10.152.183.172  no       Missing relation: backend-database
+s3-integrator                              blocked          1  s3-integrator     1/edge      255  10.152.183.85   no       Missing parameters: ['access-key', 'secret-key']
+
+Unit                 Workload     Agent      Address      Ports  Message
+mysql-k8s/0          waiting      executing  10.1.206.78         waiting to get cluster primary from peers
+mysql-k8s/1*         maintenance  executing  10.1.206.80         Creating cluster
+mysql-k8s/2          waiting      executing  10.1.206.79         waiting to get cluster primary from peers
+mysql-router-k8s/0*  waiting      executing  10.1.206.74         
+s3-integrator/0*     blocked      executing  10.1.206.73         Missing parameters: ['access-key', 'secret-key']
+
+[32mINFO    [0m pytest_operator.plugin:plugin.py:909 Juju error logs:
+
+
+[32mINFO    [0m pytest_operator.plugin:plugin.py:991 Forgetting model main...
