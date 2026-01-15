@@ -1,0 +1,27 @@
+[32mINFO    [0m integration.test_terraform:test_terraform.py:75 Deploying terraform module
+[32mINFO    [0m integration.test_terraform:test_terraform.py:31 Waiting for active: mysql-k8s
+[32mINFO    [0m integration.test_terraform:test_terraform.py:38 Waiting for blocked: mysql-router-k8s, s3-integrator
+[32mINFO    [0m integration.test_terraform:test_terraform.py:94 Configuring s3-integrator credentials
+[32mINFO    [0m integration.test_terraform:test_terraform.py:31 Waiting for active: mysql-k8s, s3-integrator
+[32mINFO    [0m integration.test_terraform:test_terraform.py:38 Waiting for blocked: mysql-router-k8s
+[32mINFO    [0m pytest_operator.plugin:plugin.py:903 Model status:
+
+Model  Controller          Cloud/Region        Version  SLA          Timestamp
+test   microk8s-localhost  microk8s/localhost  3.6.12   unsupported  01:29:01Z
+
+App               Version                  Status   Scale  Charm             Channel     Rev  Address         Exposed  Message
+mysql-k8s         8.0.41-0ubuntu0.22.04.1  waiting      3  mysql-k8s         8.0/stable  255  10.152.183.208  no       installing agent
+mysql-router-k8s  8.0.41-0ubuntu0.22.04.1  blocked      1  mysql-router-k8s  8.0/stable  748  10.152.183.131  no       Missing relation: database
+s3-integrator                              waiting      1  s3-integrator     1/edge      255  10.152.183.129  no       installing agent
+
+Unit                 Workload     Agent      Address       Ports  Message
+mysql-k8s/0          active       executing  10.1.141.142         
+mysql-k8s/1*         active       executing  10.1.141.144         Primary
+mysql-k8s/2          maintenance  idle       10.1.141.143         joining the cluster
+mysql-router-k8s/0*  active       idle       10.1.141.137         
+s3-integrator/0*     active       idle       10.1.141.136         
+
+[32mINFO    [0m pytest_operator.plugin:plugin.py:909 Juju error logs:
+
+
+[32mINFO    [0m pytest_operator.plugin:plugin.py:991 Forgetting model main...
