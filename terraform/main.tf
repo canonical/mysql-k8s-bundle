@@ -7,7 +7,7 @@ locals {
 }
 
 module "mysql_server" {
-  source      = "git::https://github.com/canonical/mysql-k8s-operator//terraform?ref=main"
+  source      = "git::https://github.com/canonical/mysql-operators//kubernetes/terraform?ref=8.0/edge"
   model       = var.model
   app_name    = var.mysql_server.app_name
   base        = var.mysql_server.base
