@@ -11,26 +11,26 @@ python = "^3.10"
 optional = true
 
 [tool.poetry.group.format.dependencies]
-ruff = "^0.8.0"
+ruff = "^0.15.0"
 
 [tool.poetry.group.lint]
 optional = true
 
 [tool.poetry.group.lint.dependencies]
-ruff = "^0.8.0"
-codespell = "2.3.0"
+ruff = "^0.15.0"
+codespell = "2.4.1"
 
 [tool.poetry.group.integration.dependencies]
-pytest = "^8.3.3"
+pytest = "^8.4.2"
 pytest-github-secrets = {git = "https://github.com/canonical/data-platform-workflows", tag = "v41.1.1", subdirectory = "python/pytest_plugins/github_secrets"}
-pytest-operator = "^0.38.0"
+pytest-operator = "^0.43.2"
 pytest-operator-cache = {git = "https://github.com/canonical/data-platform-workflows", tag = "v41.1.1", subdirectory = "python/pytest_plugins/pytest_operator_cache"}
 pytest-operator-groups = {git = "https://github.com/canonical/data-platform-workflows", tag = "v41.1.1", subdirectory = "python/pytest_plugins/pytest_operator_groups"}
 allure-pytest-collection-report = {git = "https://github.com/canonical/data-platform-workflows", tag = "v41.1.1", subdirectory = "python/pytest_plugins/allure_pytest_collection_report"}
 # renovate caret doesn't work: https://github.com/renovatebot/renovate/issues/26940
 juju = "^3.6.0.0"
 mysql-connector-python = "~9.1.0"
-allure-pytest = "^2.13.5"
+allure-pytest = "^2.15.3"
 
 # Testing tools configuration
 [tool.coverage.run]
