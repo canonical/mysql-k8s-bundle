@@ -42,7 +42,7 @@ jobs:
       artifact-prefix: packed-charm-  # required input, but not used
       architecture: amd64
       cloud: microk8s
-      microk8s-snap-channel: 1.34-strict/stable  # renovate: latest microk8s
+      microk8s-snap-channel: 1.35-strict/stable  # renovate: latest microk8s
       juju-agent-version: 3.6.14  # renovate: juju-agent-pin-minor
       _beta_allure_report: true
     permissions:
