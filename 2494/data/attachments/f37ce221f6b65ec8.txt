@@ -1,0 +1,104 @@
+[32mINFO    [0m integration.test_terraform:test_terraform.py:75 Deploying terraform module
+[32mINFO    [0m integration.test_terraform:test_terraform.py:31 Waiting for active: mysql-k8s
+[32mINFO    [0m integration.test_terraform:test_terraform.py:38 Waiting for blocked: mysql-router-k8s, s3-integrator
+[32mINFO    [0m integration.test_terraform:test_terraform.py:94 Configuring s3-integrator credentials
+[32mINFO    [0m integration.test_terraform:test_terraform.py:31 Waiting for active: mysql-k8s, s3-integrator
+[32mINFO    [0m integration.test_terraform:test_terraform.py:38 Waiting for blocked: mysql-router-k8s
+[32mINFO    [0m pytest_operator.plugin:plugin.py:903 Model status:
+
+Model  Controller          Cloud/Region        Version  SLA          Timestamp
+test   microk8s-localhost  microk8s/localhost  3.6.19   unsupported  01:29:52Z
+
+App               Version                  Status   Scale  Charm             Channel     Rev  Address         Exposed  Message
+mysql-k8s         8.0.44-0ubuntu0.22.04.1  active       3  mysql-k8s         8.0/stable  346  10.152.183.122  no       
+mysql-router-k8s  8.0.44                   blocked      1  mysql-router-k8s  8.0/stable  871  10.152.183.151  no       Missing relation: database
+s3-integrator                              active       1  s3-integrator     1/edge      520  10.152.183.110  no       
+
+Unit                 Workload     Agent      Address      Ports  Message
+mysql-k8s/0          maintenance  executing  10.1.233.13         joining the cluster
+mysql-k8s/1*         active       executing  10.1.233.15         Primary
+mysql-k8s/2          active       idle       10.1.233.14         
+mysql-router-k8s/0*  active       idle       10.1.233.9          
+s3-integrator/0*     active       idle       10.1.233.8          
+
+[32mINFO    [0m pytest_operator.plugin:plugin.py:909 Juju error logs:
+
+unit-mysql-k8s-1: 01:28:31 ERROR unit.mysql-k8s/1.juju-log Failed to execute MySQL cli command
+Traceback (most recent call last):
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/src/mysql_k8s_helpers.py", line 768, in _run_mysqlcli_script
+    stdout, _ = process.wait_output()
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/venv/lib/python3.10/site-packages/ops/pebble.py", line 1771, in wait_output
+    raise ExecError[AnyStr](self._command, exit_code, out_value, err_value)
+ops.pebble.ExecError: non-zero exit code 1 executing ['/usr/bin/mysql', '-u', 'root', '-p', '-N', '--socket=/var/run/mysqld/mysqld.sock', '-e', "SELECT User FROM mysql.user WHERE User LIKE 'mysqlrouter'"], stdout='', stderr="Enter password: ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)\n"
+unit-mysql-k8s-1: 01:28:31 ERROR unit.mysql-k8s/1.juju-log Failed to list roles
+unit-mysql-k8s-1: 01:28:31 ERROR unit.mysql-k8s/1.juju-log Uncaught exception while in charm code:
+Traceback (most recent call last):
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/lib/charms/mysql/v0/mysql.py", line 1397, in list_mysql_roles
+    output = self._run_mysqlcli_script(
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/lib/charms/tempo_coordinator_k8s/v0/charm_tracing.py", line 1065, in wrapped_function
+    return callable(*args, **kwargs)  # type: ignore
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/src/mysql_k8s_helpers.py", line 776, in _run_mysqlcli_script
+    raise MySQLClientError from None
+charms.mysql.v0.mysql.MySQLClientError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/src/charm.py", line 1141, in <module>
+    main(MySQLOperatorCharm)
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/venv/lib/python3.10/site-packages/ops/main.py", line 551, in main
+    manager.run()
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/venv/lib/python3.10/site-packages/ops/main.py", line 530, in run
+    self._emit()
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/venv/lib/python3.10/site-packages/ops/main.py", line 519, in _emit
+    _emit_charm_event(self.charm, self.dispatcher.event_name)
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/venv/lib/python3.10/site-packages/ops/main.py", line 147, in _emit_charm_event
+    event_to_emit.emit(*args, **kwargs)
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/venv/lib/python3.10/site-packages/ops/framework.py", line 348, in emit
+    framework._emit(event)
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/venv/lib/python3.10/site-packages/ops/framework.py", line 860, in _emit
+    self._reemit(event_path)
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/venv/lib/python3.10/site-packages/ops/framework.py", line 950, in _reemit
+    custom_handler(event)
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/lib/charms/tempo_coordinator_k8s/v0/charm_tracing.py", line 1065, in wrapped_function
+    return callable(*args, **kwargs)  # type: ignore
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/src/charm.py", line 860, in _on_mysql_pebble_ready
+    self._configure_instance(container)
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/lib/charms/tempo_coordinator_k8s/v0/charm_tracing.py", line 1065, in wrapped_function
+    return callable(*args, **kwargs)  # type: ignore
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/src/charm.py", line 756, in _configure_instance
+    self._mysql.configure_mysql_router_roles()
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/lib/charms/tempo_coordinator_k8s/v0/charm_tracing.py", line 1065, in wrapped_function
+    return callable(*args, **kwargs)  # type: ignore
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/lib/charms/mysql/v0/mysql.py", line 1273, in configure_mysql_router_roles
+    existing_roles = self.list_mysql_roles(role)
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/lib/charms/tempo_coordinator_k8s/v0/charm_tracing.py", line 1065, in wrapped_function
+    return callable(*args, **kwargs)  # type: ignore
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/lib/charms/mysql/v0/mysql.py", line 1405, in list_mysql_roles
+    raise MySQLListMySQLRolesError from e
+charms.mysql.v0.mysql.MySQLListMySQLRolesError
+unit-mysql-k8s-1: 01:28:32 ERROR juju.worker.uniter.operation hook "mysql-pebble-ready" (via hook dispatching script: dispatch) failed: exit status 1
+unit-mysql-k8s-1: 01:28:32 ERROR juju.worker.uniter pebble poll failed for container "mysql": failed to send pebble-ready event: hook failed
+unit-mysql-k8s-1: 01:28:33 ERROR unit.mysql-k8s/1.juju-log Failed to initialise MySQL data directory
+Traceback (most recent call last):
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/src/mysql_k8s_helpers.py", line 232, in initialise_mysqld
+    process.wait_output()
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/venv/lib/python3.10/site-packages/ops/pebble.py", line 1771, in wait_output
+    raise ExecError[AnyStr](self._command, exit_code, out_value, err_value)
+ops.pebble.ExecError: non-zero exit code 1 executing ['/usr/sbin/mysqld', '--initialize', '-u', 'mysql'], stdout='', stderr=''
+unit-mysql-k8s-1: 01:28:38 ERROR unit.mysql-k8s/1.juju-log Failed to initialise MySQL data directory
+Traceback (most recent call last):
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/src/mysql_k8s_helpers.py", line 232, in initialise_mysqld
+    process.wait_output()
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/venv/lib/python3.10/site-packages/ops/pebble.py", line 1771, in wait_output
+    raise ExecError[AnyStr](self._command, exit_code, out_value, err_value)
+ops.pebble.ExecError: non-zero exit code 1 executing ['/usr/sbin/mysqld', '--initialize', '-u', 'mysql'], stdout='', stderr=''
+unit-mysql-k8s-1: 01:28:43 ERROR unit.mysql-k8s/1.juju-log Failed to initialise MySQL data directory
+Traceback (most recent call last):
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/src/mysql_k8s_helpers.py", line 232, in initialise_mysqld
+    process.wait_output()
+  File "/var/lib/juju/agents/unit-mysql-k8s-1/charm/venv/lib/python3.10/site-packages/ops/pebble.py", line 1771, in wait_output
+    raise ExecError[AnyStr](self._command, exit_code, out_value, err_value)
+ops.pebble.ExecError: non-zero exit code 1 executing ['/usr/sbin/mysqld', '--initialize', '-u', 'mysql'], stdout='', stderr=''
+
+[32mINFO    [0m pytest_operator.plugin:plugin.py:991 Forgetting model main...
