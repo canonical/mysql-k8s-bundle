@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"Deploy bundle with apps and test various component integrations.","321119","test_smoke","tests.integration","2026-04-06","passed","2026-04-06","","test_bundle","",""
+"Install necessary binaries.","8730","test_snap_install","tests.integration","2026-04-06","passed","2026-04-06","","test_terraform","",""
+"Deploy terraform module with app.","7832","test_terraform","tests.integration","2026-04-06","broken","2026-04-06","","test_terraform","",""
